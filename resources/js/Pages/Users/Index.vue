@@ -66,12 +66,17 @@ export default {
                                     >
                                         Editar
                                     </button>
+                                    <button
+                                        class = "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 focus:outline-none ml-2"
+                                        @click="deleteUser(user.id)"
+                                    >
+                                        Apagar
+                                    </button>
+
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-
-
                 </div>
             </div>
         </div>
