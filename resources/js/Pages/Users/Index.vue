@@ -8,17 +8,16 @@ export default {
     components: {Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
         users: Array,
+        permissions: Array,
     },
     methods: {
         newUser() {
             this.$inertia.visit(`/users/create`);
         },
         editUser(userId) {
-            // Exemplo: Redirecionar para uma rota de edição
             this.$inertia.visit(`/users/${userId}/edit`);
         },
         deleteUser(userId) {
-            // Exemplo: Chamar um endpoint para deletar o usuário
             if (confirm("Tem certeza que deseja excluir este usuário?")) {
                 this.$inertia.delete(`/users/${userId}`);
             }
@@ -28,25 +27,23 @@ export default {
         }
     },
 };
-
 </script>
 
 <template>
     <Head title="Dashboard" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :permissions="permissions">
         <template #header>
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
                 Dashboard
             </h2>
-        </template>,
+        </template>
 
         <div class="py-1">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="flex items-center justify-end mb-2">
-
                     <PrimaryButton
                         @click="newUser()"
                     >
@@ -56,7 +53,6 @@ export default {
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
-
                     <div class="m-7">
                         <table class="table-auto w-full rounded-lg overflow-hidden">
                             <thead>
@@ -95,7 +91,6 @@ export default {
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
