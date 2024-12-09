@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,11 +26,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/users', function () {
-    $users = User::all();
-    return Inertia::render('Users/Index', [
-        'users' => $users,
-    ]);
-})->name('users.index');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users',[UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}/edit',[UserController::class, 'edit'])->name('users.edit');
+    Route::patch('/users/{user}',[UserController::class, 'update'])->name('users.update');
+    Route::get('/users/{user}/delete',[UserController::class, 'delete'])->name('users.delete');
+    Route::delete('/users/{user}',[UserController::class, 'destroy'])->name('users.destroy');
+});
+
+
 
 require __DIR__.'/auth.php';
