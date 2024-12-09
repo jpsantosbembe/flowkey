@@ -6,13 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use function Laravel\Prompts\password;
 
 class UserController extends Controller
 {
     //
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('id', 'asc')->get();
         return Inertia::render('Users/Index', [
             'users' => $users,
         ]);
@@ -44,18 +45,20 @@ class UserController extends Controller
     }
     public function edit(User $user)
     {
-        return Inertia::render('Users/Edit');
+        return Inertia::render('Users/Edit', [
+            'users' => $user,
+        ]);
     }
     public function update(Request $request, User $user){
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
         $user->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'password' => $validated['password'] ? Hash::make($validated['password']) : $user->password,
         ]);
         return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
