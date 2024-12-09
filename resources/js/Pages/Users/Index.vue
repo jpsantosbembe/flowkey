@@ -1,13 +1,18 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/vue3";
+import {Head, Link} from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 export default {
-    components: {Head, AuthenticatedLayout},
+    components: {Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
         users: Array,
     },
     methods: {
+        newUser() {
+            this.$inertia.visit(`/users/create`);
+        },
         editUser(userId) {
             // Exemplo: Redirecionar para uma rota de edição
             this.$inertia.visit(`/users/${userId}/edit`);
@@ -27,7 +32,6 @@ export default {
 </script>
 
 <template>
-
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
@@ -35,67 +39,63 @@ export default {
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Usuarios
+                Dashboard
             </h2>
         </template>,
 
-        <div class="py-12">
+        <div class="py-1">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="flex items-center justify-end mb-2">
 
-                <div class="flex justify-end mb-2">
-                    <button
-                        class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
-                        @click="showUser(user.id)"
+                    <PrimaryButton
+                        @click="newUser()"
                     >
                         Novo Usuário
-                    </button>
+                    </PrimaryButton>
                 </div>
-
-
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
-                    <div class="p-6 text-gray-900">
-                        You're logged in!
-                    </div>
 
-                        <table class="table-auto border-collapse border border-gray-300 w-full mx-auto">
+                    <div class="m-7">
+                        <table class="table-auto w-full rounded-lg overflow-hidden">
                             <thead>
-                            <tr>
-                                <th class="border px-4 py-2">ID</th>
-                                <th class="border px-4 py-2">Name</th>
-                                <th class="border px-4 py-2">Email</th>
-                                <th class="border px-4 py-2">Ações</th>
+                            <tr class=" bg-gray-800 text-white">
+                                <th class="px-2">ID</th>
+                                <th class="px-2">Nome</th>
+                                <th class="px-2">Email</th>
+                                <th class="px-2">Ações</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="user in users" :key="user.id">
-                                <td class="border px-4 py-2">{{ user.id }}</td>
-                                <td class="border px-4 py-2">{{ user.name }}</td>
-                                <td class="border px-4 py-2">{{ user.email }}</td>
-                                <td class="border px-4 py-2">
-                                    <button
-                                        class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+                            <tr v-for="user in users" :key="user.id" class="border">
+                                <td class="text-center border">{{ user.id }}</td>
+                                <td class="px-2 border">{{ user.name }}</td>
+                                <td class="px-2 border">{{ user.email }}</td>
+                                <td class="text-center p-2 border">
+                                    <Link
+                                        class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                         @click="showUser(user.id)"
                                     >
-                                        Mostrar
-                                    </button>
-                                    <button
-                                    class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ml-2"
-                                    @click="editUser(user.id)"
+                                        Visualizar
+                                    </Link>
+                                    <Link
+                                        class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        @click="editUser(user.id)"
                                     >
                                         Editar
-                                    </button>
-                                    <button
-                                        class = "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 focus:outline-none ml-2"
-                                        @click="deleteUser(user.id)"
-                                    >
-                                        Apagar
-                                    </button>
+                                    </Link><Link
+                                    class="rounded-md text-sm text-gray-600 underline hover:text-red-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    @click="deleteUser(user.id)"
+                                >
+                                    Deletar
+                                </Link>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+
                 </div>
             </div>
         </div>

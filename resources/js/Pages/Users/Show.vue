@@ -1,9 +1,10 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 export default {
-    components: {Head, AuthenticatedLayout},
+    components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
         users: Array,
     },
@@ -29,16 +30,16 @@ export default {
             </h2>
         </template>,
 
-        <div class="py-12">
+        <div class="py-1">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-                <div class="flex justify-end mb-2">
-                    <button
-                        class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+                <div class="flex items-center mb-2">
+
+                    <PrimaryButton
                         @click="goBack()"
                     >
-                        Mostrar
-                    </button>
+                        Voltar
+                    </PrimaryButton>
                 </div>
 
 
