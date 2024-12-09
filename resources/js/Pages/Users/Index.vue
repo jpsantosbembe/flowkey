@@ -18,6 +18,9 @@ export default {
                 this.$inertia.delete(`/users/${userId}`);
             }
         },
+        showUser(userId) {
+            this.$inertia.visit(`/users/${userId}`);
+        }
     },
 };
 
@@ -38,6 +41,17 @@ export default {
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+
+                <div class="flex justify-end mb-2">
+                    <button
+                        class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+                        @click="showUser(user.id)"
+                    >
+                        Novo Usuário
+                    </button>
+                </div>
+
+
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
@@ -61,7 +75,13 @@ export default {
                                 <td class="border px-4 py-2">{{ user.email }}</td>
                                 <td class="border px-4 py-2">
                                     <button
-                                    class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+                                        class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+                                        @click="showUser(user.id)"
+                                    >
+                                        Mostrar
+                                    </button>
+                                    <button
+                                    class = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ml-2"
                                     @click="editUser(user.id)"
                                     >
                                         Editar
@@ -72,7 +92,6 @@ export default {
                                     >
                                         Apagar
                                     </button>
-
                                 </td>
                             </tr>
                             </tbody>
