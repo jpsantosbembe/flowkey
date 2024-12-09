@@ -19,7 +19,7 @@ export default {
 
 <template>
 
-    <Head title="Dashboard" />
+    <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
         <template #header>
@@ -28,7 +28,8 @@ export default {
             >
                 Usuarios
             </h2>
-        </template>,
+        </template>
+        ,
 
         <div class="py-1">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -51,15 +52,15 @@ export default {
                     </div>
 
                     <div class="p-6 text-gray-900">
-                        {{users.id}}
+                        {{ users.id }}
                     </div>
 
                     <div class="p-6 text-gray-900">
-                        Nome: {{users.name}}
+                        Nome: {{ users.name }}
                     </div>
 
                     <div class="p-6 text-gray-900">
-                        E-mail: {{users.email}}
+                        E-mail: {{ users.email }}
                     </div>
                 </div>
             </div>
