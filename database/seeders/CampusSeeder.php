@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Campi;
+use App\Models\Campus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CampiSeeder extends Seeder
+class CampusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class CampiSeeder extends Seeder
     public function run(): void
     {
         //
-        Campi::create(['nome' => 'Campus Tapajos']);
-        Campi::create(['nome' => 'Campus Rondon']);
+        Campus::create(['nome' => 'Campus Tapajos']);
+        Campus::create(['nome' => 'Campus Rondon']);
     }
 }

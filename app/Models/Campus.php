@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Campi extends Model
+class Campus extends Model
 {
     //
     use HasFactory;
@@ -13,4 +13,6 @@ class Campi extends Model
     protected $fillable = [
         'nome',
     ];
+
+    protected $table = 'campi';
 }

@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class CampiController extends Controller
+class CampusController extends Controller
 {
     //
     public function index()
     {
         $campi = User::oderBy('id')->get();
-        return Inertia::render('Campi/Index', [
+        return Inertia::render('Campus/Index', [
             'campi' => $campi,
         ]);
     }
@@ -24,19 +24,19 @@ class CampiController extends Controller
         Campi::create([
             'name' => $validated['name'],
         ]);
-        return redirect()->route('campi.index')->with('success', 'Campi created successfully');
+        return redirect()->route('campi.index')->with('success', 'Campus created successfully');
     }
 
     public function show(Campi $campi)
     {
-        return Inertia::render('Campi/Show', [
+        return Inertia::render('Campus/Show', [
             'campi' => $campi,
         ]);
     }
 
     public function edit(Campi $campi)
     {
-        return Inertia::render('Campi/Edit', [
+        return Inertia::render('Campus/Edit', [
             'campi' => $campi,
         ]);
     }
@@ -51,6 +51,6 @@ class CampiController extends Controller
             'nome' => $validated['nome'],
         ]);
 
-        return redirect()->route('campi.index')->with('success', 'Campi updated successfully');
+        return redirect()->route('campi.index')->with('success', 'Campus updated successfully');
     }
 }
