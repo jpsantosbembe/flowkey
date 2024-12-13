@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -62,6 +61,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy'])
         ->name('users.destroy')
         ->middleware('permission:users.delete');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/campi', [\App\Http\Controllers\CampusController::class, 'index'])
+        ->name('campi.index')
+        ->middleware('permission:users.index');
+
 });
 
 

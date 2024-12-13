@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campus;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,44 +11,47 @@ class CampusController extends Controller
     //
     public function index()
     {
-        $campi = User::oderBy('id')->get();
-        return Inertia::render('Campus/Index', [
+        $campi = Campus::orderBy('id')->get();
+        return Inertia::render('Campi/Index', [
             'campi' => $campi,
+            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nome' => ['required', 'string', 'max:255'],
         ]);
-        Campi::create([
-            'name' => $validated['name'],
+
+        Campus::create([
+            'nome' => $validated['nome'],
         ]);
+
         return redirect()->route('campi.index')->with('success', 'Campus created successfully');
     }
 
-    public function show(Campi $campi)
+    public function show(Campus $campus)
     {
         return Inertia::render('Campus/Show', [
-            'campi' => $campi,
+            'campi' => $campus,
         ]);
     }
 
-    public function edit(Campi $campi)
+    public function edit(Campus $campus)
     {
         return Inertia::render('Campus/Edit', [
-            'campi' => $campi,
+            'campus' => $campus,
         ]);
     }
 
-    public function update(Request $request, Campi $campi)
+    public function update(Request $request, Campus $campus)
     {
         $validated = $request->validate([
             'nome' => ['required', 'string', 'max:255'],
         ]);
 
-        $campi->update([
+        $campus->update([
             'nome' => $validated['nome'],
         ]);
 
