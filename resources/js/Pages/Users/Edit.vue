@@ -37,7 +37,7 @@ export default {
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Editar Usuário
+                Usuarios -> Edit
             </h2>
         </template>
 

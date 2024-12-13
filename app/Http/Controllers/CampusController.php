@@ -18,6 +18,13 @@ class CampusController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('Campi/Create',[
+            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CampusController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -64,9 +65,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/campi', [\App\Http\Controllers\CampusController::class, 'index'])
+    Route::get('/campi', [CampusController::class, 'index'])
         ->name('campi.index')
-        ->middleware('permission:users.index');
+        ->middleware('permission:campi.index');
+
+    Route::get('/campi/create', [CampusController::class, 'create'])
+        ->name('campi.create')
+        ->middleware('permission:campi.create');
+
+    Route::post('/campi', [CampusController::class, 'store'])
+        ->name('campi.store')
+        ->middleware('permission:campi.create');
 
 });
 

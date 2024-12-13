@@ -42,7 +42,7 @@ export default {
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Criar Usuário
+                Usuarios -> Create
             </h2>
         </template>
 
