@@ -6,14 +6,14 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 export default {
     components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
-        users: Object,
+        campus: Object,
         permissions: Array,
     },
     methods: {
         goBack() {
-            this.$inertia.visit('/users');
+            this.$inertia.visit('/campi');
         },
-    }
+    },
 };
 
 </script>
@@ -27,7 +27,7 @@ export default {
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Usuarios -> Show
+                Campus -> Show
             </h2>
         </template>
         ,
@@ -44,7 +44,6 @@ export default {
                     </PrimaryButton>
                 </div>
 
-
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
@@ -53,15 +52,11 @@ export default {
                     </div>
 
                     <div class="p-6 text-gray-900">
-                        {{ users.id }}
+                        {{ campus.id }}
                     </div>
 
                     <div class="p-6 text-gray-900">
-                        Nome: {{ users.name }}
-                    </div>
-
-                    <div class="p-6 text-gray-900">
-                        E-mail: {{ users.email }}
+                        Nome: {{ campus.nome }}
                     </div>
                 </div>
             </div>

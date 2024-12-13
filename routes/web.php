@@ -77,6 +77,10 @@ Route::middleware(['auth'])->group(function () {
         ->name('campi.store')
         ->middleware('permission:campi.create');
 
+    Route::get('/campi/{campus}', [CampusController::class, 'show'])
+        ->name('campi.show')
+        ->middleware('permission:campi.show');
+
 });
 
 

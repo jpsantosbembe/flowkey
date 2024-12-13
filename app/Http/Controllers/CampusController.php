@@ -40,8 +40,9 @@ class CampusController extends Controller
 
     public function show(Campus $campus)
     {
-        return Inertia::render('Campus/Show', [
-            'campi' => $campus,
+        return Inertia::render('Campi/Show', [
+            'campus' => $campus,
+            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
     }
 
