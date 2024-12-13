@@ -48,8 +48,9 @@ class CampusController extends Controller
 
     public function edit(Campus $campus)
     {
-        return Inertia::render('Campus/Edit', [
+        return Inertia::render('Campi/Edit', [
             'campus' => $campus,
+            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
     }
 

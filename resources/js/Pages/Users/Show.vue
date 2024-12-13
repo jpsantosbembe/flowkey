@@ -44,7 +44,6 @@ export default {
                     </PrimaryButton>
                 </div>
 
-
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >

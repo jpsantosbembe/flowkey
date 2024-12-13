@@ -81,6 +81,14 @@ Route::middleware(['auth'])->group(function () {
         ->name('campi.show')
         ->middleware('permission:campi.show');
 
+    Route::get('/campi/{campus}/edit', [CampusController::class, 'edit'])
+        ->name('campi.edit')
+        ->middleware('permission:campi.edit');
+
+    Route::patch('/campi/{campus}', [CampusController::class, 'update'])
+        ->name('campi.update')
+        ->middleware('permission:campi.edit');
+
 });
 
 
