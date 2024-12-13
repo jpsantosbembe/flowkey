@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Campus extends Model
+class Guarita extends Model
 {
     //
     use HasFactory;
@@ -13,9 +13,7 @@ class Campus extends Model
         'nome',
     ];
 
-    protected $table = 'campi';
-
-    public function guaritas() {
-        return $this->hasMany(Guarita::class);
+    public function campi() {
+        return $this->belongsTo(Campus::class);
     }
 }

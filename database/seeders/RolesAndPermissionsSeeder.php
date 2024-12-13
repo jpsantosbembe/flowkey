@@ -21,6 +21,11 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'users.edit']);
         Permission::create(['name' => 'users.delete']);
 
+        Permission::create(['name' => 'campi.index']);
+        Permission::create(['name' => 'campi.create']);
+        Permission::create(['name' => 'campi.show']);
+        Permission::create(['name' => 'campi.edit']);
+
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo([
             'users.index',
@@ -28,6 +33,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'users.show',
             'users.edit',
             'users.delete',
+            'campi.index',
+            'campi.create',
+            'campi.show',
+            'campi.edit',
         ]);
     }
 }
