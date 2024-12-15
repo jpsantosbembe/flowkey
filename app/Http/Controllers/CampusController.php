@@ -12,15 +12,15 @@ class CampusController extends Controller
     public function index()
     {
         $campi = Campus::orderBy('id')->get();
-        return Inertia::render('Campi/Index', [
-            'campi' => $campi,
+        return Inertia::render('Campuses/Index', [
+            'campuses' => $campi,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('Campi/Create',[
+        return Inertia::render('Campuses/Create',[
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
     }
@@ -28,19 +28,19 @@ class CampusController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nome' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
         ]);
 
         Campus::create([
-            'nome' => $validated['nome'],
+            'name' => $validated['name'],
         ]);
 
-        return redirect()->route('campi.index')->with('success', 'Campus created successfully');
+        return redirect()->route('campuses.index')->with('success', 'Campus created successfully');
     }
 
     public function show(Campus $campus)
     {
-        return Inertia::render('Campi/Show', [
+        return Inertia::render('Campuses/Show', [
             'campus' => $campus,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
@@ -48,7 +48,7 @@ class CampusController extends Controller
 
     public function edit(Campus $campus)
     {
-        return Inertia::render('Campi/Edit', [
+        return Inertia::render('Campuses/Edit', [
             'campus' => $campus,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
@@ -57,13 +57,13 @@ class CampusController extends Controller
     public function update(Request $request, Campus $campus)
     {
         $validated = $request->validate([
-            'nome' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
         ]);
 
         $campus->update([
-            'nome' => $validated['nome'],
+            'name' => $validated['name'],
         ]);
 
-        return redirect()->route('campi.index')->with('success', 'Campus updated successfully');
+        return redirect()->route('campuses.index')->with('success', 'Campus updated successfully');
     }
 }

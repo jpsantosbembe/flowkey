@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -21,10 +22,10 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'users.edit']);
         Permission::create(['name' => 'users.delete']);
 
-        Permission::create(['name' => 'campi.index']);
-        Permission::create(['name' => 'campi.create']);
-        Permission::create(['name' => 'campi.show']);
-        Permission::create(['name' => 'campi.edit']);
+        Permission::create(['name' => 'campuses.index']);
+        Permission::create(['name' => 'campuses.create']);
+        Permission::create(['name' => 'campuses.show']);
+        Permission::create(['name' => 'campuses.edit']);
 
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo([
@@ -33,10 +34,15 @@ class RolesAndPermissionsSeeder extends Seeder
             'users.show',
             'users.edit',
             'users.delete',
-            'campi.index',
-            'campi.create',
-            'campi.show',
-            'campi.edit',
+            'campuses.index',
+            'campuses.create',
+            'campuses.show',
+            'campuses.edit',
         ]);
+
+        $user = User::find(1);
+        if ($user) {
+            $user->assignRole('admin');
+        }
     }
 }

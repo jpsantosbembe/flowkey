@@ -56,9 +56,9 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('campi.index')"
-                                    :href="route('campi.index')"
-                                    :active="route().current('campi.index')"
+                                    v-if="permissions.includes('campuses.index')"
+                                    :href="route('campuses.index')"
+                                    :active="route().current('campuses.index')"
                                 >
                                     Campi
                                 </NavLink>

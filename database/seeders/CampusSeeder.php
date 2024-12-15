@@ -14,7 +14,7 @@ class CampusSeeder extends Seeder
     public function run(): void
     {
         //
-        Campus::create(['nome' => 'Campus Tapajos']);
-        Campus::create(['nome' => 'Campus Rondon']);
+        Campus::create(['name' => 'Campus Tapajos']);
+        Campus::create(['name' => 'Campus Rondon']);
     }
 }

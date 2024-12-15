@@ -16,17 +16,17 @@ class GuaritaSeeder extends Seeder
         //
         Guarita::create([
             'nome' => 'Guarita 1',
-            'campi_id' => 1,
+            'campuses_id' => 1,
         ]);
 
         Guarita::create([
             'nome' => 'Guarita 2',
-            'campi_id' => 1,
+            'campuses_id' => 1,
         ]);
 
         Guarita::create([
             'nome' => 'Guarita 3',
-            'campi_id' => 2,
+            'campuses_id' => 2,
         ]);
     }
 }

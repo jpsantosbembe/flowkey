@@ -19,7 +19,7 @@ class CampusFactory extends Factory
     {
         return [
             //
-            'nome' => $this->faker->name(),
+            'name' => $this->faker->name(),
         ];
     }
 }

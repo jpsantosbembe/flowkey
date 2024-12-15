@@ -65,29 +65,29 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/campi', [CampusController::class, 'index'])
-        ->name('campi.index')
-        ->middleware('permission:campi.index');
+    Route::get('/campuses', [CampusController::class, 'index'])
+        ->name('campuses.index')
+        ->middleware('permission:campuses.index');
 
-    Route::get('/campi/create', [CampusController::class, 'create'])
-        ->name('campi.create')
-        ->middleware('permission:campi.create');
+    Route::get('/campuses/create', [CampusController::class, 'create'])
+        ->name('campuses.create')
+        ->middleware('permission:campuses.create');
 
-    Route::post('/campi', [CampusController::class, 'store'])
-        ->name('campi.store')
-        ->middleware('permission:campi.create');
+    Route::post('/campuses', [CampusController::class, 'store'])
+        ->name('campuses.store')
+        ->middleware('permission:campuses.create');
 
-    Route::get('/campi/{campus}', [CampusController::class, 'show'])
-        ->name('campi.show')
-        ->middleware('permission:campi.show');
+    Route::get('/campuses/{campus}', [CampusController::class, 'show'])
+        ->name('campuses.show')
+        ->middleware('permission:campuses.show');
 
-    Route::get('/campi/{campus}/edit', [CampusController::class, 'edit'])
-        ->name('campi.edit')
-        ->middleware('permission:campi.edit');
+    Route::get('/campuses/{campus}/edit', [CampusController::class, 'edit'])
+        ->name('campuses.edit')
+        ->middleware('permission:campuses.edit');
 
-    Route::patch('/campi/{campus}', [CampusController::class, 'update'])
-        ->name('campi.update')
-        ->middleware('permission:campi.edit');
+    Route::patch('/campuses/{campus}', [CampusController::class, 'update'])
+        ->name('campuses.update')
+        ->middleware('permission:campuses.edit');
 
 });
 

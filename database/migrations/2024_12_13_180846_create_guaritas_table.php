@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('guaritas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('campi_id');
+            $table->unsignedBigInteger('campuses_id');
             $table->string( 'nome');
             $table->timestamps();
-            $table->foreign('campi_id')->references('id')->on('campi');
+            $table->foreign('campuses_id')->references('id')->on('campuses');
         });
     }
 

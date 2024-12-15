@@ -3,41 +3,36 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm } from "@inertiajs/vue3";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 export default {
-    components: {SecondaryButton, PrimaryButton, Head, AuthenticatedLayout },
+    components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
+        campus: Object,
         permissions: Array,
     },
-    methods: {
-        goBack() {
-            this.$inertia.visit('/campi');
-        },
-    },
-    setup() {
+    setup(props) {
         const form = useForm({
-            nome: "",
+            name: props.campus.name,
         });
         const submit = () => {
-            form.post("/campi", {
+            form.patch(`/campuses/${props.campus.id}`, {
                 onSuccess: () => {
-                    alert("Campus criado com sucesso!");
+                    alert("Campus atualizado com sucesso!");
                 },
             });
         };
-        return { form, submit };
+        return {form, submit};
     },
 };
 </script>
 
 <template>
-    <Head title="Criar Campus" />
+    <Head title="Editar Usuário"/>
 
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Campi -> Create
+                Campuses -> Edit
             </h2>
         </template>
 
@@ -49,23 +44,16 @@ export default {
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
                                 <input
-                                    v-model="form.nome"
+                                    v-model="form.name"
                                     id="name"
                                     type="text"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
-                                <span v-if="form.errors.nome" class="text-red-500 text-sm">{{ form.errors.nome }}</span>
+                                <span v-if="form.errors.name" class="text-red-500 text-sm">{{ form.errors.name }}</span>
                             </div>
 
                             <div class="flex justify-end">
-                                <SecondaryButton
-                                    class="mr-2"
-                                    @click="goBack()"
-                                >
-                                    Voltar
-                                </SecondaryButton>
-                                <PrimaryButton type="submit">Cadastrar</PrimaryButton>
-
+                                <PrimaryButton type="submit">Salvar Alterações</PrimaryButton>
                             </div>
                         </form>
                     </div>

@@ -13,7 +13,7 @@ class Guarita extends Model
         'nome',
     ];
 
-    public function campi() {
+    public function campuses() {
         return $this->belongsTo(Campus::class);
     }
 }

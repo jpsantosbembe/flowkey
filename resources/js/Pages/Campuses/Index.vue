@@ -7,18 +7,18 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 export default {
     components: {Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
-        campi: Array,
+        campuses: Array,
         permissions: Array,
     },
     methods: {
         newCampus() {
-            this.$inertia.visit(`/campi/create`);
+            this.$inertia.visit(`/campuses/create`);
         },
         editCampus(userId) {
-            this.$inertia.visit(`/campi/${userId}/edit`);
+            this.$inertia.visit(`/campuses/${userId}/edit`);
         },
         showCampus(userId) {
-            this.$inertia.visit(`/campi/${userId}`);
+            this.$inertia.visit(`/campuses/${userId}`);
         },
     },
 };
@@ -58,9 +58,9 @@ export default {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="campus in campi" :key="campus.id" class="border">
+                            <tr v-for="campus in campuses" :key="campus.id" class="border">
                                 <td class="text-center border">{{ campus.id }}</td>
-                                <td class="px-2 border">{{ campus.nome }}</td>
+                                <td class="px-2 border">{{ campus.name }}</td>
                                 <td class="text-center p-2 border">
                                     <Link
                                         class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

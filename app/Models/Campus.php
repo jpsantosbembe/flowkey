@@ -10,10 +10,10 @@ class Campus extends Model
     //
     use HasFactory;
     protected $fillable = [
-        'nome',
+        'name',
     ];
 
-    protected $table = 'campi';
+    protected $table = 'campuses';
 
     public function guaritas() {
         return $this->hasMany(Guarita::class);

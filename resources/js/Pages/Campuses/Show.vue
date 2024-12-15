@@ -11,7 +11,7 @@ export default {
     },
     methods: {
         goBack() {
-            this.$inertia.visit('/campi');
+            this.$inertia.visit('/campuses');
         },
     },
 };
@@ -56,7 +56,7 @@ export default {
                     </div>
 
                     <div class="p-6 text-gray-900">
-                        Nome: {{ campus.nome }}
+                        Nome: {{ campus.name }}
                     </div>
                 </div>
             </div>
