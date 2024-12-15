@@ -16,6 +16,6 @@ class Campus extends Model
     protected $table = 'campuses';
 
     public function guaritas() {
-        return $this->hasMany(Guarita::class);
+        return $this->hasMany(Guardhouse::class);
     }
 }

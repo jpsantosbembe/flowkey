@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guarita extends Model
+class Guardhouse extends Model
 {
     //
     use HasFactory;
     protected $fillable = [
-        'nome',
+        'name',
     ];
 
     public function campuses() {

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesAndPermissionsSeeder::class,
             CampusSeeder::class,
-            GuaritaSeeder::class,],
+            GuardhouseSeeder::class,],
         );
     }
 }
