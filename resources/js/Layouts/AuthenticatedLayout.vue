@@ -71,6 +71,14 @@ const props = defineProps({
                                     Guaritas
                                 </NavLink>
 
+                                <NavLink
+                                    v-if="permissions.includes('keys.index')"
+                                    :href="route('keys.index')"
+                                    :active="route().current('keys.index')"
+                                >
+                                    Chaves
+                                </NavLink>
+
                             </div>
                         </div>
 

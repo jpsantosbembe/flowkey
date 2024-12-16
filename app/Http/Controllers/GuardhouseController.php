@@ -51,7 +51,7 @@ class GuardhouseController extends Controller
     }
 
     public function edit(Guardhouse $guardhouse){
-        $campuses = Campus::orderBy('name')->get();
+        $campuses = Campus::orderBy('id')->get();
 
         return Inertia::render('Guardhouses/Edit', [
             'guardhouse' => $guardhouse,

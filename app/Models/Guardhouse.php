@@ -17,4 +17,8 @@ class Guardhouse extends Model
     public function campus() {
         return $this->belongsTo(Campus::class);
     }
+
+    public function keys() {
+        return $this->hasMany(Key::class);
+    }
 }
