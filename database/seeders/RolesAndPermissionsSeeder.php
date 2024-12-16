@@ -29,6 +29,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Permission::create(['name' => 'guardhouses.index']);
         Permission::create(['name' => 'guardhouses.show']);
+        Permission::create(['name' => 'guardhouses.create']);
+        Permission::create(['name' => 'guardhouses.edit']);
 
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo([
@@ -43,6 +45,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'campuses.edit',
             'guardhouses.index',
             'guardhouses.show',
+            'guardhouses.create',
+            'guardhouses.edit',
         ]);
 
         $user = User::find(1);

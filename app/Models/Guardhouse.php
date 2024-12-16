@@ -11,6 +11,7 @@ class Guardhouse extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'campus_id',
     ];
 
     public function campus() {
