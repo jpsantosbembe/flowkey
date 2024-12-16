@@ -79,6 +79,14 @@ const props = defineProps({
                                     Chaves
                                 </NavLink>
 
+                                <NavLink
+                                    v-if="permissions.includes('keyauthorizations.index')"
+                                    :href="route('keyauthorizations.index')"
+                                    :active="route().current('keyauthorizations.index')"
+                                >
+                                    Autorizações
+                                </NavLink>
+
                             </div>
                         </div>
 

@@ -18,4 +18,8 @@ class Key extends Model
     public function guardhouse() {
         return $this->belongsTo(Guardhouse::class);
     }
+
+    public function users() {
+        return $this->belongsToMany(User::class, 'key_authorizations', 'key_id', 'user_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CampusController;
 use App\Http\Controllers\GuardhouseController;
+use App\Http\Controllers\KeyAuthorizationController;
 use App\Http\Controllers\KeyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -123,21 +124,52 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/keys', [KeyController::class, 'index'])
         ->name('keys.index')
         ->middleware('permission:keys.index');
+
     Route::get('/keys/create', [KeyController::class, 'create'])
         ->name('keys.create')
         ->middleware('permission:keys.create');
+
     Route::post('/keys', [KeyController::class, 'store'])
         ->name('keys.store')
         ->middleware('permission:keys.create');
+
     Route::get('/keys/{key}', [KeyController::class, 'show'])
         ->name('keys.show')
         ->middleware('permission:keys.show');
+
     Route::get('/keys/{key}/edit', [KeyController::class, 'edit'])
         ->name('keys.edit')
         ->middleware('permission:keys.edit');
+
     Route::patch('/keys/{key}', [KeyController::class, 'update'])
         ->name('keys.update')
         ->middleware('permission:keys.edit');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/keyauthorizations', [KeyAuthorizationController::class, 'index'])
+        ->name('keyauthorizations.index')
+        ->middleware('permission:keyauthorizations.index');
+
+    Route::get('/keyauthorizations/create', [KeyAuthorizationController::class, 'create'])
+        ->name('keyauthorizations.create')
+        ->middleware('permission:keyauthorizations.create');
+
+    Route::post('/keyauthorizations', [KeyAuthorizationController::class, 'store'])
+        ->name('keyauthorizations.store')
+        ->middleware('permission:keyauthorizations.create');
+
+    Route::get('/keyauthorizations/{keyAuthorization}', [KeyAuthorizationController::class, 'show'])
+        ->name('keyauthorizations.show')
+        ->middleware('permission:keyauthorizations.show');
+
+    Route::get('/keyauthorizations/{keyAuthorization}/edit', [KeyAuthorizationController::class, 'edit'])
+        ->name('keyauthorizations.edit')
+        ->middleware('permission:keyauthorizations.edit');
+
+    Route::patch('/keyauthorizations/{keyAuthorization}', [KeyAuthorizationController::class, 'update'])
+        ->name('keyauthorizations.edit')
+        ->middleware('permission:keyauthorizations.edit');
 });
 
 

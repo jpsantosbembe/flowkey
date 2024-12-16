@@ -52,4 +52,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function keys() {
+        return $this->belongsToMany(Key::class, 'key_authorizations', 'user_id', 'key_id')
+            ->withTimestamps();
+    }
 }
