@@ -63,6 +63,14 @@ const props = defineProps({
                                     Campi
                                 </NavLink>
 
+                                <NavLink
+                                    v-if="permissions.includes('guardhouses.index')"
+                                    :href="route('guardhouses.index')"
+                                    :active="route().current('guardhouses.index')"
+                                >
+                                    Guaritas
+                                </NavLink>
+
                             </div>
                         </div>
 

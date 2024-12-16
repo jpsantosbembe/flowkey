@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampusController;
+use App\Http\Controllers\GuardhouseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -89,6 +90,16 @@ Route::middleware(['auth'])->group(function () {
         ->name('campuses.update')
         ->middleware('permission:campuses.edit');
 
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/guardhouses', [GuardhouseController::class, 'index'])
+        ->name('guardhouses.index')
+        ->middleware('permission:guardhouses.index');
+
+    Route::get('/guardhouses/{guardhouse}', [GuardhouseController::class, 'show'])
+        ->name('guardhouses.show')
+        ->middleware('permission:guardhouses.show');
 });
 
 

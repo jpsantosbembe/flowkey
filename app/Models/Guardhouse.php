@@ -13,7 +13,7 @@ class Guardhouse extends Model
         'name',
     ];
 
-    public function campuses() {
+    public function campus() {
         return $this->belongsTo(Campus::class);
     }
 }

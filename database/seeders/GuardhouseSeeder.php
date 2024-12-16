@@ -16,17 +16,17 @@ class GuardhouseSeeder extends Seeder
         //
         Guardhouse::create([
             'name' => 'Guardhouse 1',
-            'campuses_id' => 1,
+            'campus_id' => 1,
         ]);
 
         Guardhouse::create([
             'name' => 'Guardhouse 2',
-            'campuses_id' => 1,
+            'campus_id' => 1,
         ]);
 
         Guardhouse::create([
             'name' => 'Guardhouse 3',
-            'campuses_id' => 2,
+            'campus_id' => 2,
         ]);
     }
 }

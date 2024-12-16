@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('guardhouses', function (Blueprint $table) {
             $table->id();
             $table->string( 'name');
-            $table->unsignedBigInteger('campuses_id');
+            $table->unsignedBigInteger('campus_id');
             $table->timestamps();
-            $table->foreign('campuses_id')->references('id')->on('campuses');
+            $table->foreign('campus_id')->references('id')->on('campuses');
         });
     }
 
