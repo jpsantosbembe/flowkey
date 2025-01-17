@@ -32,6 +32,16 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'guardhouses.create']);
         Permission::create(['name' => 'guardhouses.edit']);
 
+        Permission::create(['name' => 'keys.index']);
+        Permission::create(['name' => 'keys.create']);
+        Permission::create(['name' => 'keys.show']);
+        Permission::create(['name' => 'keys.edit']);
+
+        Permission::create(['name' => 'keyauthorizations.index']);
+        Permission::create(['name' => 'keyauthorizations.create']);
+        Permission::create(['name' => 'keyauthorizations.show']);
+        Permission::create(['name' => 'keyauthorizations.edit']);
+
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo([
             'users.index',
