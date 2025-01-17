@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::aliasMiddleware('permission', PermissionMiddleware::class);
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])
         ->name('users.index')
@@ -170,6 +171,36 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/keyauthorizations/{keyAuthorization}', [KeyAuthorizationController::class, 'update'])
         ->name('keyauthorizations.edit')
         ->middleware('permission:keyauthorizations.edit');
+});
+
+Route::middleware(['auth'])->group(function (){
+    Route::get('/coordinators', [CoordinatorController::class, 'index'])
+        ->name('coordinators.index')
+
+        ->middleware('permission:coordinators.index');
+    Route::get('/coordinators/create', [CoordinatorController::class, 'create'])
+        ->name('coordinators.create')
+        ->middleware('permission:coordinators.create');
+
+    Route::post('coordinators/store', [CoordinatorController::class, 'store'])
+        ->name('coordinators.store')
+        ->middleware('permission:coordinators.create');
+
+    Route::get('coordinators/{id}', [CoordinatorController::class, 'show'])
+        ->name('coordinators.show')
+        ->middleware('permission:coordinators.show');
+
+    Route::get('coordinators/edit', [CoordinatorController::class, 'edit'])
+        ->name('coordinators.edit')
+        ->middleware('permission:coordinators.edit');
+
+    Route::get('coordinators/{id}', [CoordinatorController::class, 'update'])
+        ->name('coordinators.update')
+        ->middleware('permission:coordinators.update');
+
+    Route::delete('coordinators/{id}', [CoodinatorController::class, 'destroy'])
+        ->name('coordinators.destroy')
+        ->middleware('permission:coordinators.destroy');
 });
 
 

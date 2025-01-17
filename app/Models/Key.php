@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Key extends Model
 {
@@ -21,5 +22,10 @@ class Key extends Model
 
     public function users() {
         return $this->belongsToMany(User::class, 'key_authorizations', 'key_id', 'user_id');
+    }
+
+    public function coordinators() : BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'coordinators_keys', 'key_id', 'user_id');
     }
 }
