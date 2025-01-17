@@ -47,6 +47,14 @@ class RolesAndPermissionsSeeder extends Seeder
             'guardhouses.show',
             'guardhouses.create',
             'guardhouses.edit',
+            'keys.index',
+            'keys.create',
+            'keys.show',
+            'keys.edit',
+            'keyauthorizations.index',
+            'keyauthorizations.create',
+            'keyauthorizations.show',
+            'keyauthorizations.edit',
         ]);
 
         $user = User::find(1);
