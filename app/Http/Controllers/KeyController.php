@@ -19,6 +19,18 @@ class KeyController extends Controller
         ]);
     }
 
+    public function indexApi(Request $request)
+    {
+        $query = Key::with(['guardhouse','users']);
+
+        if (request('search') && !empty($request->search)) {
+            $query->orderByRaw("CASE WHEN label LIKE ? THEN 0 ELSE 1 END", ['%' . $request->search . '%']);
+        }
+
+        $keys = $query->orderBy('id')->get();
+        return $keys;
+    }
+
     public function create()
     {
         $guardhouses = Guardhouse::orderBy('name')->get();
@@ -27,6 +39,7 @@ class KeyController extends Controller
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
     }
+
 
     public function store(Request $request)
     {

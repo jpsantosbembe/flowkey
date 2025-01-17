@@ -172,5 +172,9 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('permission:keyauthorizations.edit');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('api/keys')->name('api.keys')->uses(KeyController::class . '@indexApi');
+});
+
 
 require __DIR__ . '/auth.php';
