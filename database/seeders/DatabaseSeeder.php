@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesAndPermissionsSeeder::class,
             CampusSeeder::class,
-            GuardhouseSeeder::class,],
+            GuardhouseSeeder::class,
+            KeySeeder::class,
+            KeyAuthorizationSeeder::class,
+            CoordinatorKeysSeeder::class,],
         );
     }
 }

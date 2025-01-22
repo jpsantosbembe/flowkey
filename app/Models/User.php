@@ -44,25 +44,23 @@ class User extends Authenticatable
      * @return array<string, string>
      */
 
-    protected $dates = [
+    protected array $dates = [
         'deleted_at',
         ];
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
 
-    public function keys() {
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    public function authorizedKeys() {
         return $this->belongsToMany(Key::class, 'key_authorizations', 'user_id', 'key_id')
             ->withTimestamps();
     }
 
-    public function classes(): BelongsToMany
-    {
-        return $this->belongsToMany(Key::class, 'coordinators_keys', 'user_id', 'class_id');
+    public function coordinatedKeys() {
+        return $this->belongsToMany(Key::class, 'coordinators_keys', 'user_id', 'key_id')
+            ->withTimestamps();
     }
 
 }

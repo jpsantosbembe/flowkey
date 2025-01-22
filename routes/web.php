@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampusController;
+use App\Http\Controllers\CoordinatorKeysController;
 use App\Http\Controllers\GuardhouseController;
 use App\Http\Controllers\KeyAuthorizationController;
 use App\Http\Controllers\KeyController;
@@ -174,33 +175,29 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function (){
-    Route::get('/coordinators', [CoordinatorController::class, 'index'])
-        ->name('coordinators.index')
+    Route::get('/coordinatorkeys', [CoordinatorKeysController::class, 'index'])
+        ->name('coordinatorkeys.index')
+        ->middleware('permission:coordinatorkeys.index');
 
-        ->middleware('permission:coordinators.index');
-    Route::get('/coordinators/create', [CoordinatorController::class, 'create'])
-        ->name('coordinators.create')
-        ->middleware('permission:coordinators.create');
+    Route::get('/coordinatorkeys/create', [CoordinatorKeysController::class, 'create'])
+        ->name('coordinatorkeys.create')
+        ->middleware('permission:coordinatorkeys.create');
 
-    Route::post('coordinators/store', [CoordinatorController::class, 'store'])
-        ->name('coordinators.store')
-        ->middleware('permission:coordinators.create');
+    Route::post('coordinatorkeys/store', [CoordinatorKeysController::class, 'store'])
+        ->name('coordinatorkeys.store')
+        ->middleware('permission:coordinatorkeys.create');
 
-    Route::get('coordinators/{id}', [CoordinatorController::class, 'show'])
-        ->name('coordinators.show')
-        ->middleware('permission:coordinators.show');
+    Route::get('coordinatorkeys/{id}', [CoordinatorKeysController::class, 'show'])
+        ->name('coordinatorkeys.show')
+        ->middleware('permission:coordinatorkeys.show');
 
-    Route::get('coordinators/edit', [CoordinatorController::class, 'edit'])
-        ->name('coordinators.edit')
-        ->middleware('permission:coordinators.edit');
+    Route::get('coordinatorkeys/edit', [CoordinatorKeysController::class, 'edit'])
+        ->name('coordinatorkeys.edit')
+        ->middleware('permission:coordinatorkeys.edit');
 
-    Route::get('coordinators/{id}', [CoordinatorController::class, 'update'])
-        ->name('coordinators.update')
-        ->middleware('permission:coordinators.update');
-
-    Route::delete('coordinators/{id}', [CoodinatorController::class, 'destroy'])
-        ->name('coordinators.destroy')
-        ->middleware('permission:coordinators.destroy');
+    Route::get('coordinators/{id}', [CoordinatorKeysController::class, 'update'])
+        ->name('coordinatorkeys.update')
+        ->middleware('permission:coordinatorkeys.update');
 });
 
 

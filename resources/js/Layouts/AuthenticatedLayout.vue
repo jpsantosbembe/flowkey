@@ -87,6 +87,14 @@ const props = defineProps({
                                     Autorizações
                                 </NavLink>
 
+                                <NavLink
+                                    v-if="permissions.includes('coordinatorkeys.index')"
+                                    :href="route('coordinatorkeys.index')"
+                                    :active="route().current('coordinatorkeys.index')"
+                                >
+                                    Coordenadores
+                                </NavLink>
+
                             </div>
                         </div>
 

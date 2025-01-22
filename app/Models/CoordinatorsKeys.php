@@ -13,4 +13,12 @@ class CoordinatorsKeys extends Model
         'key_id',
     ];
 
+    public function key() {
+        return $this->belongsTo(Key::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
 }
