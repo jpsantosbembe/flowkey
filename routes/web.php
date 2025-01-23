@@ -183,15 +183,15 @@ Route::middleware(['auth'])->group(function (){
         ->name('coordinatorkeys.create')
         ->middleware('permission:coordinatorkeys.create');
 
-    Route::post('coordinatorkeys/store', [CoordinatorKeysController::class, 'store'])
+    Route::post('/coordinatorkeys', [CoordinatorKeysController::class, 'store'])
         ->name('coordinatorkeys.store')
         ->middleware('permission:coordinatorkeys.create');
 
-    Route::get('coordinatorkeys/{id}', [CoordinatorKeysController::class, 'show'])
+    Route::get('/coordinatorkeys/{id}', [CoordinatorKeysController::class, 'show'])
         ->name('coordinatorkeys.show')
         ->middleware('permission:coordinatorkeys.show');
 
-    Route::get('coordinatorkeys/edit', [CoordinatorKeysController::class, 'edit'])
+    Route::get('/coordinatorkeys/edit', [CoordinatorKeysController::class, 'edit'])
         ->name('coordinatorkeys.edit')
         ->middleware('permission:coordinatorkeys.edit');
 

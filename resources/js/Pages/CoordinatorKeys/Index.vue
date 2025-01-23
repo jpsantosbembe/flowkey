@@ -40,7 +40,7 @@ export default {
                     <PrimaryButton
                         @click="newKeyAuthorization()"
                     >
-                        Nova Autorização
+                        Novo Coordenador
                     </PrimaryButton>
                 </div>
                 <div

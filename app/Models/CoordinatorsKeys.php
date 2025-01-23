@@ -9,7 +9,7 @@ class CoordinatorsKeys extends Model
     public $table = 'coordinators_keys';
 
     protected $fillable = [
-        'docente_id',
+        'user_id',
         'key_id',
     ];
 
