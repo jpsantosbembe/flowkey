@@ -5,9 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -15,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -44,21 +41,19 @@ class User extends Authenticatable
      * @return array<string, string>
      */
 
-    protected array $dates = [
-        'deleted_at',
-        ];
-
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
-    public function authorizedKeys() {
+    public function authorizedKeys()
+    {
         return $this->belongsToMany(Key::class, 'key_authorizations', 'user_id', 'key_id')
             ->withTimestamps();
     }
 
-    public function coordinatedKeys() {
+    public function coordinatedKeys()
+    {
         return $this->belongsToMany(Key::class, 'coordinators_keys', 'user_id', 'key_id')
             ->withTimestamps();
     }
