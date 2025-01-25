@@ -187,17 +187,17 @@ Route::middleware(['auth'])->group(function (){
         ->name('coordinatorkeys.store')
         ->middleware('permission:coordinatorkeys.create');
 
-    Route::get('/coordinatorkeys/{id}', [CoordinatorKeysController::class, 'show'])
+    Route::get('/coordinatorkeys/{coordinatorsKeys}', [CoordinatorKeysController::class, 'show'])
         ->name('coordinatorkeys.show')
         ->middleware('permission:coordinatorkeys.show');
 
-    Route::get('/coordinatorkeys/edit', [CoordinatorKeysController::class, 'edit'])
+    Route::get('/coordinatorkeys/{coordinatorsKeys}/edit', [CoordinatorKeysController::class, 'edit'])
         ->name('coordinatorkeys.edit')
         ->middleware('permission:coordinatorkeys.edit');
 
-    Route::get('coordinators/{id}', [CoordinatorKeysController::class, 'update'])
-        ->name('coordinatorkeys.update')
-        ->middleware('permission:coordinatorkeys.update');
+    Route::patch('coordinatorkeys/{coordinatorsKeys}', [CoordinatorKeysController::class, 'update'])
+        ->name('coordinatorkeys.edit')
+        ->middleware('permission:coordinatorkeys.edit');
 });
 
 

@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\CoordinatorsKeys;
 use App\Models\Key;
+use App\Models\KeyAuthorization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CoordinatorKeysController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $coordinatorKeys = CoordinatorsKeys::with(['user', 'key'])->orderBy('id')->get();
         //dd($coordinatorKeys);
         return Inertia::render('CoordinatorKeys/Index', [
@@ -19,7 +21,8 @@ class CoordinatorKeysController extends Controller
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         $users = User::orderBy('id')->get();
         $keys = Key::orderBy('id')->get();
         return Inertia::render('CoordinatorKeys/Create', [
@@ -30,7 +33,8 @@ class CoordinatorKeysController extends Controller
 
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validated = $request->validate([
             'user_id' => ['required', 'exists:users,id', 'integer'],
             'key_id' => ['required', 'exists:keys,id', 'integer'],
@@ -44,19 +48,42 @@ class CoordinatorKeysController extends Controller
         return redirect()->route('coordinatorkeys.index')->with('success', 'Coordinator Key created successfully.');
     }
 
-    public function show($id) {
+    public function show($id)
+    {
 
     }
 
-    public function edit($id) {
+    public function edit(CoordinatorsKeys $coordinatorsKeys)
+    {
+        $coordinatorsKeys->load(['user', 'key']);
+        $users = User::orderBy('id')->get();
+        $keys = Key::orderBy('id')->get();
+        return Inertia::render('CoordinatorKeys/Edit', [
+            'coordinatorsKeys' => $coordinatorsKeys,
+            'users' => $users,
+            'keys' => $keys,
+            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+        ]);
 
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, CoordinatorsKeys $coordinatorsKeys)
+    {
+        $validated = $request->validate([
+            'user_id' => ['required', 'exists:users,id', 'integer'],
+            'key_id' => ['required', 'exists:keys,id', 'integer'],
+        ]);
 
+        $coordinatorsKeys->update([
+            'user_id' => $validated['user_id'],
+            'key_id' => $validated['key_id'],
+        ]);
+
+        return redirect()->route('coordinatorkeys.index')->with('success', 'Coordinator Key updated successfully.');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
     }
 }
