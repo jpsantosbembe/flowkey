@@ -22,7 +22,6 @@ export default {
         const form = useForm({
             user_id: props.coordinatorsKeys.user_id,
             key_id: props.coordinatorsKeys.key_id,
-            is_active: props.coordinatorsKeys.is_active,
         });
 
         const submit = () => {
