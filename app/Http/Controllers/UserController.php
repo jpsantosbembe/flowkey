@@ -6,14 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
-use function Laravel\Prompts\password;
 
 class UserController extends Controller
 {
-    //
     public function index()
     {
-        $users = User::orderBy('id')->get();
+        $users = User::orderBy('id')->paginate(2);
         return Inertia::render('Users/Index', [
             'users' => $users,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
@@ -74,19 +72,4 @@ class UserController extends Controller
         ]);
         return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
-
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
-    }
-
-    public function delete(User $user)
-    {
-        return Inertia::render('Users/Delete', [
-            'user' => $user,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
-        ]);
-    }
-
 }
