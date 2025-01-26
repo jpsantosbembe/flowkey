@@ -58,6 +58,7 @@ export default {
                 </div>
 
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+
                     <div class="p-6">
 
                         <VTable
@@ -128,11 +129,9 @@ export default {
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
-
 </template>
-
-
