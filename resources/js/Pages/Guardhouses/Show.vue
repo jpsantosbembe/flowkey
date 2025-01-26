@@ -8,6 +8,12 @@ export default {
     props: {
         guardhouse: Object,
         permissions: Array,
+        guardhouse_campus: Array,
+    },
+    data() {
+        return {
+            openPanels: [0],
+        };
     },
     methods: {
         goBack() {
@@ -19,24 +25,19 @@ export default {
 </script>
 
 <template>
-
     <Head title="Dashboard"/>
-
     <AuthenticatedLayout :permissions="permissions">
+
         <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Campus -> Show
             </h2>
         </template>
-        ,
 
-        <div class="py-1">
+        <div class="pt-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-                <div class="flex items-center mb-2">
-
+                <div class="flex items-center justify-start mb-6">
                     <PrimaryButton
                         @click="goBack()"
                     >
@@ -44,23 +45,39 @@ export default {
                     </PrimaryButton>
                 </div>
 
-                <div
-                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
-                >
-                    <div class="p-6 text-gray-900">
-                        You're logged in!
-                    </div>
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <v-expansion-panels
+                        v-model="openPanels"
+                        multiple
+                    >
+                        <v-expansion-panel>
+                            <v-expansion-panel-title>Informações do Campus</v-expansion-panel-title>
 
-                    <div class="p-6 text-gray-900">
-                        {{ guardhouse.id }}
-                    </div>
+                            <v-expansion-panel-text>
+                                <div class="text-gray-900">
+                                    ID: {{ guardhouse.id }}
+                                </div>
 
-                    <div class="p-6 text-gray-900">
-                        Nome: {{ guardhouse.name }}
-                    </div>
-                    <div class="p-6 text-gray-900">
-                        Guarita: {{ guardhouse.campus.name }}
-                    </div>
+                                <div class="text-gray-900 mt-3">
+                                    Nome: {{ guardhouse.name }}
+                                </div>
+                            </v-expansion-panel-text>
+                        </v-expansion-panel>
+
+                        <v-expansion-panel>
+                            <v-expansion-panel-title>Campus da guarita</v-expansion-panel-title>
+                            <v-expansion-panel-text>
+                                    <v-chip
+                                        v-for="(campus, index) in guardhouse_campus"
+                                        :key="index"
+                                        class="m-1"
+                                    >
+                                        {{ campus.name }}
+                                    </v-chip>
+                            </v-expansion-panel-text>
+                        </v-expansion-panel>
+                    </v-expansion-panels>
+
                 </div>
             </div>
         </div>

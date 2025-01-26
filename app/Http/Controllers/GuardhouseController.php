@@ -12,7 +12,7 @@ class GuardhouseController extends Controller
     //
     public function index()
     {
-        $guardhouses = Guardhouse::with('campus')->orderBy('id')->get();
+        $guardhouses = Guardhouse::with('campus')->orderBy('id')->paginate(3);
         return Inertia::render('Guardhouses/Index', [
             'guardhouses' => $guardhouses,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
@@ -21,9 +21,11 @@ class GuardhouseController extends Controller
 
     public function show(Guardhouse $guardhouse){
         $guardhouse->load('campus');
+        //dd($guardhouse->campus->toArray());
         return Inertia::render('Guardhouses/Show', [
             'guardhouse' => $guardhouse,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'guardhouse_campus' => [$guardhouse->campus->toArray()] ,
         ]);
     }
 

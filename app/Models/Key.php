@@ -21,7 +21,7 @@ class Key extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(User::class, 'key_authorizations', 'key_id', 'user_id');
+        return $this->belongsToMany(User::class, 'key_authorizations', 'key_id', 'user_id')->withPivot('is_active')->wherePivot('is_active', true);;
     }
 
     public function coordinators() : BelongsToMany

@@ -3,22 +3,36 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head, Link} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 export default {
-    components: {Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
+    components: {Pagination, Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
         guardhouses: Array,
         permissions: Array,
+    },
+    data() {
+        return {
+            currentPage: this.guardhouses.current_page,
+            totalPages: this.guardhouses.last_page,
+        };
     },
     methods: {
         newGuardhouses() {
             this.$inertia.visit(`/guardhouses/create`);
         },
-        editGuardhouses(userId) {
+        editGuardhouse(userId) {
             this.$inertia.visit(`/guardhouses/${userId}/edit`);
         },
-        showGuardhouses(userId) {
+        showGuardhouse(userId) {
             this.$inertia.visit(`/guardhouses/${userId}`);
+        },
+        handlePageChange(page) {
+            if (page === 1) {
+                this.$inertia.get('/guardhouses');
+            } else {
+                this.$inertia.get(`/guardhouses`, { page });
+            }
         },
     },
 };
@@ -28,56 +42,83 @@ export default {
     <Head title="Dashboard" />
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Guardhouses -> Index
             </h2>
         </template>
-        <div class="py-1">
+
+        <div class="pt-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+
                 <div class="flex items-center justify-end mb-2">
                     <PrimaryButton
-                        @click="newGuardhouses()"
-                    >
+                        @click="newGuardhouses()">
                         Nova Guarita
                     </PrimaryButton>
                 </div>
-                <div
-                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
-                >
-                    <div class="m-7">
-                        <table class="table-auto w-full rounded-lg overflow-hidden">
+
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+
+                    <div class="p-6">
+
+                        <VTable
+                            height="250px"
+                            fixed-header
+                        >
                             <thead>
-                            <tr class=" bg-gray-800 text-white">
-                                <th class="px-2">ID</th>
-                                <th class="px-2">Nome</th>
-                                <th class="px-2">Campus</th>
-                                <th class="px-2">Ações</th>
+                            <tr>
+                                <th class="text-start">ID</th>
+                                <th class="text-start">Nome</th>
+                                <th class="text-start">Campus</th>
+                                <th class="text-center">Ações</th>
                             </tr>
                             </thead>
+
                             <tbody>
-                            <tr v-for="guardhouse in guardhouses" :key="guardhouse.id" class="border">
-                                <td class="text-center border">{{ guardhouse.id }}</td>
-                                <td class="px-2 border">{{ guardhouse.name }}</td>
-                                <td class="px-2 border">{{ guardhouse.campus.name }}</td>
-                                <td class="text-center p-2 border">
+                            <tr v-for="guardhouse in guardhouses.data" :key="guardhouse.id">
+                                <td class="text-start">
+                                    {{ guardhouse.id }}
+                                </td>
+
+                                <td class="text-start">
+                                    {{ guardhouse.name }}
+                                </td>
+
+                                <td class="text-start">
+                                    {{ guardhouse.campus.name }}
+                                </td>
+
+                                <td class="text-center">
                                     <Link
                                         class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        @click="showGuardhouses(guardhouse.id)"
+                                        @click="showGuardhouse(guardhouse.id)"
                                     >
                                         Visualizar
                                     </Link>
+
                                     <Link
                                         class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        @click="editGuardhouses(guardhouse.id)"
+                                        @click="editGuardhouse(guardhouse.id)"
                                     >
                                         Editar
                                     </Link>
                                 </td>
                             </tr>
                             </tbody>
-                        </table>
+                        </VTable>
+
+                        <div class="flex justify-center mt-4">
+                            <Pagination
+                                :currentPage="currentPage"
+                                :totalPages="totalPages"
+                                @update:currentPage="handlePageChange"
+                            />
+                        </div>
+
+                        <div class="mt-6 text-sm text-gray-600">
+                            Exibindo {{ guardhouses.from }} a {{ guardhouses.to }} de {{ guardhouses.total }} guaritas.
+                        </div>
+
                     </div>
                 </div>
             </div>

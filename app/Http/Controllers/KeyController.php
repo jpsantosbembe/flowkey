@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guardhouse;
 use App\Models\Key;
+use App\Models\KeyAuthorization;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,7 +13,7 @@ class KeyController extends Controller
     //
     public function index()
     {
-        $keys = Key::with('guardhouse')->orderBy('id')->get();
+        $keys = Key::with('guardhouse')->orderBy('id')->paginate(3);
         return Inertia::render('Keys/Index',[
             'keys' => $keys,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
@@ -64,6 +65,8 @@ class KeyController extends Controller
         return Inertia::render('Keys/Show', [
             'iKey' => $key,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'key_coordinators' => $key->coordinators,
+            'key_users' => $key->users,
         ]);
     }
 
