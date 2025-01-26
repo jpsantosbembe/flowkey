@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id')->paginate(2);
+        $users = User::orderBy('id')->paginate(3);
         return Inertia::render('Users/Index', [
             'users' => $users,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),

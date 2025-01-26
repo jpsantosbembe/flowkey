@@ -3,12 +3,19 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head, Link} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 export default {
-    components: {Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
+    components: {Pagination, Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
         users: Object,
         permissions: Array,
+    },
+    data() {
+        return {
+            currentPage: this.users.current_page ,
+            totalPages: this.users.last_page,
+        };
     },
     methods: {
         newUser() {
@@ -20,10 +27,13 @@ export default {
         showUser(userId) {
             this.$inertia.visit(`/users/${userId}`);
         },
-        navigateTo(url) {
-            if (url) {
-                this.$inertia.visit(url);
+        handlePageChange(page) {
+            if (page === 1) {
+                this.$inertia.get('/users');
+            } else {
+                this.$inertia.get(`/users`, { page });
             }
+
         },
     },
 };
@@ -97,47 +107,17 @@ export default {
 
                         </table>
 
-
-                        <div class="flex justify-start mt-4">
-                            <ul class="flex space-x-2">
-
-                                <li v-for="(link, index) in users.links"
-                                    :key="link.label"
-                                    class="list-none">
-
-                                    <PrimaryButton
-                                        v-if="index === 0"
-                                        :disabled="!users.prev_page_url"
-                                        @click="navigateTo(users.prev_page_url)"
-                                        class="disabled:opacity-50">
-                                        Anterior
-                                    </PrimaryButton>
-
-                                    <PrimaryButton
-                                        v-else-if="link.url && index !== 0 && index !== users.links.length - 1"
-                                        :class="[link.active ? 'bg-gray-900' : 'bg-white !text-black border-gray-900 hover:bg-gray-700 hover:!text-white', '']"
-                                        @click="navigateTo(link.url)"
-                                    >
-                                        {{ link.label }}
-                                    </PrimaryButton>
-
-                                    <PrimaryButton
-                                        v-if="index === users.links.length - 1"
-                                        :disabled="!users.next_page_url"
-                                        @click="navigateTo(users.next_page_url)"
-                                        class="disabled:opacity-50"
-                                    >
-                                        Próximo
-                                    </PrimaryButton>
-                                </li>
-
-                            </ul>
+                        <div class="flex justify-center mt-4">
+                            <Pagination
+                                :currentPage="currentPage"
+                                :totalPages="totalPages"
+                                @update:currentPage="handlePageChange"
+                            />
                         </div>
 
                         <div class="mt-4 text-sm text-gray-600">
                             Exibindo {{ users.from }} a {{ users.to }} de {{ users.total }} usuários.
                         </div>
-
 
                     </div>
                 </div>
