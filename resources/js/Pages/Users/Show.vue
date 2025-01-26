@@ -13,7 +13,7 @@ export default {
     },
     data() {
         return {
-            openPanels: [0], // Apenas o primeiro painel estará aberto
+            openPanels: [0],
         };
     },
     methods: {
