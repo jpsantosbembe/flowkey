@@ -11,7 +11,7 @@ class CampusController extends Controller
     //
     public function index()
     {
-        $campi = Campus::orderBy('id')->get();
+        $campi = Campus::orderBy('id')->paginate(3);
         return Inertia::render('Campuses/Index', [
             'campuses' => $campi,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
@@ -43,6 +43,7 @@ class CampusController extends Controller
         return Inertia::render('Campuses/Show', [
             'campus' => $campus,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'campus_guardhouses' => $campus->campusGuardhouses,
         ]);
     }
 

@@ -50,7 +50,7 @@ export default {
         <div class="pt-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-                <div class="flex items-center justify-end mb-6">
+                <div class="flex items-center justify-end mb-2">
                     <PrimaryButton
                         @click="newUser()">
                         Novo Usuário

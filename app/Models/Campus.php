@@ -9,13 +9,14 @@ class Campus extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = [
         'name',
     ];
 
     protected $table = 'campuses';
 
-    public function guaritas() {
+    public function campusGuardhouses() {
         return $this->hasMany(Guardhouse::class);
     }
 }
