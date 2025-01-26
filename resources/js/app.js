@@ -6,7 +6,7 @@ import '@mdi/font/css/materialdesignicons.css';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
-import { ZiggyVue } from 'ziggy-js';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { createVuetify } from 'vuetify'; // Importa a função createVuetify
 import * as components from 'vuetify/components'; // Importa os componentes do Vuetify
 import * as directives from 'vuetify/directives'; // Importa as diretivas do Vuetify

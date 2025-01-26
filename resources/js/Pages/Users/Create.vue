@@ -1,12 +1,11 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import {Head, useForm} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { useForm } from "@inertiajs/vue3";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 export default {
-    components: {SecondaryButton, PrimaryButton, Head, AuthenticatedLayout },
+    components: {SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
         permissions: Array,
     },
@@ -31,13 +30,13 @@ export default {
             });
         };
 
-        return { form, submit };
+        return {form, submit};
     },
 };
 </script>
 
 <template>
-    <Head title="Criar Usuário" />
+    <Head title="Criar Usuário"/>
 
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
@@ -46,13 +45,17 @@ export default {
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="pt-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <form @submit.prevent="submit" class="space-y-6">
+
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
+                                <label for="name" class="block text-sm font-medium text-gray-700"
+                                >
+                                    Nome
+                                </label>
                                 <input
                                     v-model="form.name"
                                     id="name"
@@ -63,14 +66,20 @@ export default {
                             </div>
 
                             <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                                <label for="email" class="block text-sm font-medium text-gray-700"
+                                >
+                                    E-mail
+                                </label>
                                 <input
                                     v-model="form.email"
                                     id="email"
                                     type="email"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
-                                <span v-if="form.errors.email" class="text-red-500 text-sm">{{ form.errors.email }}</span>
+                                <span v-if="form.errors.email" class="text-red-500 text-sm"
+                                >
+                                    {{form.errors.email }}
+                                </span>
                             </div>
 
                             <div>
@@ -81,11 +90,17 @@ export default {
                                     type="password"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
-                                <span v-if="form.errors.password" class="text-red-500 text-sm">{{ form.errors.password }}</span>
+                                <span v-if="form.errors.password" class="text-red-500 text-sm"
+                                >
+                                    {{form.errors.password}}
+                                </span>
                             </div>
 
                             <div>
-                                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirme a Senha</label>
+                                <label for="password_confirmation" class="block text-sm font-medium text-gray-700"
+                                >
+                                    Confirme a Senha
+                                </label>
                                 <input
                                     v-model="form.password_confirmation"
                                     id="password_confirmation"
@@ -101,9 +116,14 @@ export default {
                                 >
                                     Voltar
                                 </SecondaryButton>
-                                <PrimaryButton type="submit">Cadastrar</PrimaryButton>
 
+                                <PrimaryButton
+                                    type="submit"
+                                >
+                                    Cadastrar
+                                </PrimaryButton>
                             </div>
+
                         </form>
                     </div>
                 </div>

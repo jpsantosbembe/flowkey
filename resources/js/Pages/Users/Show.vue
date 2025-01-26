@@ -15,54 +15,41 @@ export default {
         },
     }
 };
-
 </script>
 
 <template>
-
     <Head title="Dashboard"/>
-
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Usuarios -> Show
             </h2>
         </template>
-        ,
 
-        <div class="py-1">
+        <div class="pt-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-                <div class="flex items-center mb-2">
-
+                <div class="flex items-center justify-start mb-6">
                     <PrimaryButton
-                        @click="goBack()"
-                    >
+                        @click="goBack()">
                         Voltar
                     </PrimaryButton>
                 </div>
 
-                <div
-                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
-                >
-                    <div class="p-6 text-gray-900">
-                        You're logged in!
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <div class="text-gray-900 m-6">
+                        ID: {{ users.id }}
                     </div>
 
-                    <div class="p-6 text-gray-900">
-                        {{ users.id }}
-                    </div>
-
-                    <div class="p-6 text-gray-900">
+                    <div class="text-gray-900 ml-6 mb-6">
                         Nome: {{ users.name }}
                     </div>
 
-                    <div class="p-6 text-gray-900">
+                    <div class="text-gray-900 ml-6 mb-6">
                         E-mail: {{ users.email }}
                     </div>
                 </div>
+
             </div>
         </div>
     </AuthenticatedLayout>
