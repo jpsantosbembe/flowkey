@@ -44,9 +44,12 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        //dd($user->getAllPermissions()->pluck('name'));
         return Inertia::render('Users/Show', [
             'users' => $user,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'user_roles' => $user->getRoleNames(),
+            'user_permissions' => $user->getAllPermissions()->pluck('name'),
         ]);
     }
 

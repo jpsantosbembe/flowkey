@@ -8,6 +8,13 @@ export default {
     props: {
         users: Object,
         permissions: Array,
+        user_roles: Array,
+        user_permissions: Array,
+    },
+    data() {
+        return {
+            openPanels: [0], // Apenas o primeiro painel estará aberto
+        };
     },
     methods: {
         goBack() {
@@ -36,18 +43,75 @@ export default {
                     </PrimaryButton>
                 </div>
 
+
+
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <div class="text-gray-900 m-6">
-                        ID: {{ users.id }}
-                    </div>
 
-                    <div class="text-gray-900 ml-6 mb-6">
-                        Nome: {{ users.name }}
-                    </div>
+                    <v-expansion-panels
+                        v-model="openPanels"
+                        multiple
+                    >
+                        <v-expansion-panel>
+                            <v-expansion-panel-title>Informações Cadastrais</v-expansion-panel-title>
 
-                    <div class="text-gray-900 ml-6 mb-6">
-                        E-mail: {{ users.email }}
-                    </div>
+                            <v-expansion-panel-text>
+
+                                <div class="text-gray-900">
+                                    ID: {{ users.id }}
+                                </div>
+
+                                <div class="text-gray-900 mt-3">
+                                    Nome: {{ users.name }}
+                                </div>
+
+                                <div class="text-gray-900 mt-3">
+                                    E-mail: {{ users.email }}
+                                </div>
+
+                            </v-expansion-panel-text>
+
+                        </v-expansion-panel>
+
+                        <v-expansion-panel>
+
+                            <v-expansion-panel-title>Papéis do usuário no sistema</v-expansion-panel-title>
+
+                            <v-expansion-panel-text>
+                                <div class="flex"></div>
+                                <div class="flex-nowrap">
+                                    <v-chip
+                                        v-for="(role, index) in user_roles"
+                                        :key="index"
+                                        class="m-1"
+                                    >
+                                        {{ role }}
+                                    </v-chip>
+                                </div>
+                            </v-expansion-panel-text>
+
+                        </v-expansion-panel>
+
+                        <v-expansion-panel>
+
+                            <v-expansion-panel-title>Permissões do usuario no sistema</v-expansion-panel-title>
+
+                            <v-expansion-panel-text>
+                                <div class="flex"></div>
+                                <div class="flex-nowrap">
+                                    <v-chip
+                                        v-for="(permission, index) in user_permissions"
+                                        :key="index"
+                                        class="m-1"
+                                    >
+                                        {{ permission }}
+                                    </v-chip>
+                                </div>
+                            </v-expansion-panel-text>
+
+                        </v-expansion-panel>
+
+                    </v-expansion-panels>
+
                 </div>
 
             </div>
