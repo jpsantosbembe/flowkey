@@ -60,58 +60,60 @@ export default {
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6">
 
-                        <table class="table-auto w-full rounded-lg overflow-hidden">
+                        <VTable
+                            height="250px"
+                            fixed-header
+                        >
                             <thead>
-                            <tr class=" bg-gray-800 text-white">
-                                <th class="px-2">ID</th>
-                                <th class="px-2">Nome</th>
-                                <th class="px-2">Email</th>
-                                <th class="px-2">Ações</th>
-                            </tr>
+                                <tr>
+                                    <th class="text-start">ID</th>
+                                    <th class="text-start">Nome</th>
+                                    <th class="text-start">Email</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
                             </thead>
 
                             <tbody>
-                            <tr v-for="user in users.data" :key="user.id" class="border">
-                                <td
-                                    class="text-center border"
-                                >
-                                    {{ user.id }}
-                                </td>
-
-                                <td
-                                    class="px-2 border"
-                                >
-                                    {{ user.name }}
-                                </td>
-
-                                <td
-                                    class="px-2 border"
-                                >
-                                    {{ user.email }}
-                                </td>
-
-                                <td
-                                    class="text-center p-2 border"
-                                >
-                                    <Link
-                                        class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        @click="showUser(user.id)"
+                                <tr v-for="user in users.data" :key="user.id">
+                                    <td
+                                        class="text-start"
                                     >
-                                        Visualizar
-                                    </Link>
+                                        {{ user.id }}
+                                    </td>
 
-                                    <Link
-                                        class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        @click="editUser(user.id)"
+                                    <td
+                                        class="text-start"
                                     >
-                                        Editar
-                                    </Link>
-                                </td>
+                                        {{ user.name }}
+                                    </td>
 
-                            </tr>
+                                    <td
+                                        class="text-start"
+                                    >
+                                        {{ user.email }}
+                                    </td>
+
+                                    <td
+                                        class="text-center"
+                                    >
+                                        <Link
+                                            class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                            @click="showUser(user.id)"
+                                        >
+                                            Visualizar
+                                        </Link>
+
+                                        <Link
+                                            class="pr-2 rounded-md text-sm text-gray-600 underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                            @click="editUser(user.id)"
+                                        >
+                                            Editar
+                                        </Link>
+                                    </td>
+                                </tr>
                             </tbody>
 
-                        </table>
+                        </VTable>
 
                         <div class="flex justify-center mt-4">
                             <Pagination
