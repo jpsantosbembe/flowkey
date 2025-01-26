@@ -73,7 +73,6 @@ export default {
                         </v-expansion-panel>
 
                         <v-expansion-panel>
-
                             <v-expansion-panel-title>Papéis do usuário no sistema</v-expansion-panel-title>
 
                             <v-expansion-panel-text>
@@ -92,7 +91,6 @@ export default {
                         </v-expansion-panel>
 
                         <v-expansion-panel>
-
                             <v-expansion-panel-title>Permissões do usuario no sistema</v-expansion-panel-title>
 
                             <v-expansion-panel-text>
