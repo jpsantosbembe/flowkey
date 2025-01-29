@@ -74,13 +74,13 @@ export default {
 
                             <!-- Campo Seleção de Campus -->
                             <div>
-                                <label for="campuses_id" class="block text-sm font-medium text-gray-700">Campus</label>
+                                <label for="campuses_id" class="block text-sm font-medium text-gray-700">Guarita</label>
                                 <select
                                     v-model="form.guardhouse_id"
                                     id="campuses_id"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 >
-                                    <option disabled value="">Selecione um campus</option>
+                                    <option disabled value="">Selecione uma guarita</option>
                                     <option v-for="guardhouse in guardhouses" :key="guardhouse.id" :value="guardhouse.id">
                                         {{ guardhouse.name }}
                                     </option>
