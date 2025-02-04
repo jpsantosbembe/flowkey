@@ -13,7 +13,7 @@ class KeyAuthorizationController extends Controller
     //
     public function index()
     {
-        $keyAuthorization = KeyAuthorization::with(['user', 'key'])->orderBy('id')->get();
+        $keyAuthorization = KeyAuthorization::with(['user', 'key'])->orderBy('id')->paginate(3);
         //dd($keyAuthorization);
         return Inertia::render('KeyAuthorizations/Index',[
             'keyAuthorizations' => $keyAuthorization,

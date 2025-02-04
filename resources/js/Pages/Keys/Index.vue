@@ -17,7 +17,6 @@ export default {
             totalPages: this.keys.last_page,
         };
     },
-
     methods: {
         newKeys() {
             this.$inertia.visit(`/keys/create`);
