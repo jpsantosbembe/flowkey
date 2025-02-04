@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId("borrowed_by_user_id")->constrained("users"); //primeiro usuario que emprestou a chave
             $table->foreignId("given_by_user_id")->constrained("users");//usuario que deu a chave
             $table->foreignId("borrowed_key_id")->constrained("keys"); //a dita cuja chave emprestada
-            $table->foreignId("returned_by_user_id")->constrained("users");//o usuario que devolveu a chave
-            $table->foreignId("receiver_user_id")->constrained("users");//o usuario que recebeu a chave na guarita
+            $table->foreignId("returned_by_user_id")->nullable()->constrained("users");//o usuario que devolveu a chave
+            $table->foreignId("receiver_user_id")->nullable()->constrained("users");//o usuario que recebeu a chave na guarita
             $table->timestamp("borrowed_at")->useCurrent();
-            $table->timestamp("returned_at");
+            $table->timestamp("returned_at")->nullable();
             $table->timestamps();
         });
     }
