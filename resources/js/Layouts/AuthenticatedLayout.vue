@@ -95,6 +95,14 @@ const props = defineProps({
                                     Coordenadores
                                 </NavLink>
 
+                                <NavLink
+                                    v-if="permissions.includes('loans.index')"
+                                    :href="route('loans.index')"
+                                    :active="route().current('loans.index')"
+                                >
+                                    Emprestimos
+                                </NavLink>
+
                             </div>
                         </div>
 

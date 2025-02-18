@@ -13,7 +13,7 @@ class CoordinatorKeysController extends Controller
 {
     public function index()
     {
-        $coordinatorKeys = CoordinatorsKeys::with(['user', 'key'])->orderBy('id')->get();
+        $coordinatorKeys = CoordinatorsKeys::with(['user', 'key'])->orderBy('id')->paginate(3);
         //dd($coordinatorKeys);
         return Inertia::render('CoordinatorKeys/Index', [
             'coordinatorsKeys' => $coordinatorKeys,
@@ -48,9 +48,13 @@ class CoordinatorKeysController extends Controller
         return redirect()->route('coordinatorkeys.index')->with('success', 'Coordinator Key created successfully.');
     }
 
-    public function show($id)
+    public function show(CoordinatorsKeys $coordinatorsKeys)
     {
-
+        $coordinatorsKeys->load(['user', 'key']);
+        return Inertia::render('CoordinatorKeys/Show', [
+            'coordinatorsKeys' => $coordinatorsKeys,
+            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+        ]);
     }
 
     public function edit(CoordinatorsKeys $coordinatorsKeys)

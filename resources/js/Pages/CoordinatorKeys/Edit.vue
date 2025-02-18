@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         goBack() {
-            this.$inertia.visit('/coordinatorskeys');
+            this.$inertia.visit('/coordinatorkeys');
         },
     },
     setup(props) {

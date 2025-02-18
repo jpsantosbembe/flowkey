@@ -47,6 +47,11 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'coordinatorkeys.show']);
         Permission::create(['name' => 'coordinatorkeys.edit']);
 
+        Permission::create(['name' => 'loans.index']);
+        Permission::create(['name' => 'loans.create']);
+        Permission::create(['name' => 'loans.show']);
+        Permission::create(['name' => 'loans.edit']);
+
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo([
             'users.index',
@@ -74,6 +79,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'coordinatorkeys.create',
             'coordinatorkeys.show',
             'coordinatorkeys.edit',
+            'loans.index',
+            'loans.create',
+            'loans.show',
+            'loans.edit',
         ]);
 
         $user = User::find(1);

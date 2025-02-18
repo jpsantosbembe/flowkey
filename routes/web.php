@@ -5,6 +5,7 @@ use App\Http\Controllers\CoordinatorKeysController;
 use App\Http\Controllers\GuardhouseController;
 use App\Http\Controllers\KeyAuthorizationController;
 use App\Http\Controllers\KeyController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -167,6 +168,32 @@ Route::middleware(['auth'])->group(function (){
     Route::patch('coordinatorkeys/{coordinatorsKeys}', [CoordinatorKeysController::class, 'update'])
         ->name('coordinatorkeys.edit')
         ->middleware('permission:coordinatorkeys.edit');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/loans', [LoanController::class, 'index'])
+        ->name('loans.index')
+        ->middleware('permission:loans.index');
+
+    Route::get('/loans/create', [LoanController::class, 'create'])
+        ->name('loans.create')
+        ->middleware('permission:loans.create');
+
+    Route::post('/loans', [LoanController::class, 'store'])
+        ->name('loans.store')
+        ->middleware('permission:loans.create');
+
+    Route::get('/loans/{loan}', [LoanController::class, 'show'])
+        ->name('loans.show')
+        ->middleware('permission:loans.show');
+
+    Route::get('/loans/{loan}/edit', [LoanController::class, 'edit'])
+        ->name('loans.edit')
+        ->middleware('permission:loans.edit');
+
+    Route::patch('/loans/{loan}', [LoanController::class, 'update'])
+        ->name('loans.update')
+        ->middleware('permission:loans.edit');
 });
 
 Route::middleware(['auth'])->group(function () {
