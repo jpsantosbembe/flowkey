@@ -17,10 +17,10 @@ require __DIR__ . '/users/users.php';
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'canLogin'      => Route::has('login'),
+        'canRegister'   => Route::has('register'),
+        'laravelVersion'=> Application::VERSION,
+        'phpVersion'    => PHP_VERSION,
     ]);
 });
 
@@ -33,13 +33,13 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Removida a rota DELETE para Profile, pois não queremos destroy/delete.
 });
 
 Route::aliasMiddleware('permission', PermissionMiddleware::class);
 
-
 Route::middleware(['auth'])->group(function () {
+    // Campuses
     Route::get('/campuses', [CampusController::class, 'index'])
         ->name('campuses.index')
         ->middleware('permission:campuses.index');
@@ -64,9 +64,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('campuses.update')
         ->middleware('permission:campuses.edit');
 
-});
-
-Route::middleware(['auth'])->group(function () {
+    // Guardhouses
     Route::get('/guardhouses', [GuardhouseController::class, 'index'])
         ->name('guardhouses.index')
         ->middleware('permission:guardhouses.index');
@@ -90,9 +88,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/guardhouses/{guardhouse}', [GuardhouseController::class, 'update'])
         ->name('guardhouses.update')
         ->middleware('permission:guardhouses.edit');
-});
 
-Route::middleware(['auth'])->group(function () {
+    // Keys
     Route::get('/keys', [KeyController::class, 'index'])
         ->name('keys.index')
         ->middleware('permission:keys.index');
@@ -116,9 +113,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/keys/{key}', [KeyController::class, 'update'])
         ->name('keys.update')
         ->middleware('permission:keys.edit');
-});
 
-Route::middleware(['auth'])->group(function () {
+    // Key Authorizations
     Route::get('/keyauthorizations', [KeyAuthorizationController::class, 'index'])
         ->name('keyauthorizations.index')
         ->middleware('permission:keyauthorizations.index');
@@ -140,11 +136,10 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('permission:keyauthorizations.edit');
 
     Route::patch('/keyauthorizations/{keyAuthorization}', [KeyAuthorizationController::class, 'update'])
-        ->name('keyauthorizations.edit')
+        ->name('keyauthorizations.update')
         ->middleware('permission:keyauthorizations.edit');
-});
 
-Route::middleware(['auth'])->group(function (){
+    // Coordinator Keys
     Route::get('/coordinatorkeys', [CoordinatorKeysController::class, 'index'])
         ->name('coordinatorkeys.index')
         ->middleware('permission:coordinatorkeys.index');
@@ -165,12 +160,11 @@ Route::middleware(['auth'])->group(function (){
         ->name('coordinatorkeys.edit')
         ->middleware('permission:coordinatorkeys.edit');
 
-    Route::patch('coordinatorkeys/{coordinatorsKeys}', [CoordinatorKeysController::class, 'update'])
-        ->name('coordinatorkeys.edit')
+    Route::patch('/coordinatorkeys/{coordinatorsKeys}', [CoordinatorKeysController::class, 'update'])
+        ->name('coordinatorkeys.update')
         ->middleware('permission:coordinatorkeys.edit');
-});
 
-Route::middleware(['auth'])->group(function () {
+    // Loans
     Route::get('/loans', [LoanController::class, 'index'])
         ->name('loans.index')
         ->middleware('permission:loans.index');
@@ -194,11 +188,9 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/loans/{loan}', [LoanController::class, 'update'])
         ->name('loans.update')
         ->middleware('permission:loans.edit');
-});
 
-Route::middleware(['auth'])->group(function () {
+    // Rota para API de Keys
     Route::get('api/keys')->name('api.keys')->uses(KeyController::class . '@indexApi');
 });
-
 
 require __DIR__ . '/auth.php';

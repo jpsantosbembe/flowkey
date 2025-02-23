@@ -22,7 +22,7 @@ export default {
             this.$inertia.visit(`/loans/create`);
         },
         editLoan(loanId) {
-            this.$inertia.visit(`/loans/edit/${loanId}`);
+            this.$inertia.visit(`/loans/${loanId}/edit`);
         },
         showLoan(loanId) {
             this.$inertia.visit(`/loans/${loanId}`);
