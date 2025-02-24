@@ -13,20 +13,21 @@ class KeySeeder extends Seeder
      */
     public function run(): void
     {
-        //
         Key::create([
-            'label' => 'Key 1',
-            'description' => 'Key 1 description',
+            'label'         => 'Chave 37',
+            'description'   => 'Laboratório de Algoritmos',
             'guardhouse_id' => 1,
         ]);
+
         Key::create([
-            'label' => 'Key 2',
-            'description' => 'Key 2 description',
+            'label'         => 'Chave 221',
+            'description'   => 'Laboratório de Inovação',
             'guardhouse_id' => 1,
         ]);
+
         Key::create([
-            'label' => 'Key 3',
-            'description' => 'Key 3 description',
+            'label'         => 'Chave 145A',
+            'description'   => 'Laboratorio do Rondon',
             'guardhouse_id' => 2,
         ]);
     }

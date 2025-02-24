@@ -14,6 +14,11 @@ use Inertia\Inertia;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 
 require __DIR__ . '/users/users.php';
+require __DIR__ . '/campus/campus.php';
+require __DIR__ . '/guardhouses/guardhouses.php';
+require __DIR__ . '/keys/keys.php';
+require __DIR__ . '/keyauthorizations/keyauthorizations.php';
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -39,105 +44,11 @@ Route::middleware('auth')->group(function () {
 Route::aliasMiddleware('permission', PermissionMiddleware::class);
 
 Route::middleware(['auth'])->group(function () {
-    // Campuses
-    Route::get('/campuses', [CampusController::class, 'index'])
-        ->name('campuses.index')
-        ->middleware('permission:campuses.index');
-
-    Route::get('/campuses/create', [CampusController::class, 'create'])
-        ->name('campuses.create')
-        ->middleware('permission:campuses.create');
-
-    Route::post('/campuses', [CampusController::class, 'store'])
-        ->name('campuses.store')
-        ->middleware('permission:campuses.create');
-
-    Route::get('/campuses/{campus}', [CampusController::class, 'show'])
-        ->name('campuses.show')
-        ->middleware('permission:campuses.show');
-
-    Route::get('/campuses/{campus}/edit', [CampusController::class, 'edit'])
-        ->name('campuses.edit')
-        ->middleware('permission:campuses.edit');
-
-    Route::patch('/campuses/{campus}', [CampusController::class, 'update'])
-        ->name('campuses.update')
-        ->middleware('permission:campuses.edit');
-
     // Guardhouses
-    Route::get('/guardhouses', [GuardhouseController::class, 'index'])
-        ->name('guardhouses.index')
-        ->middleware('permission:guardhouses.index');
-
-    Route::get('/guardhouses/create', [GuardhouseController::class, 'create'])
-        ->name('guardhouses.create')
-        ->middleware('permission:guardhouses.create');
-
-    Route::post('/guardhouses', [GuardhouseController::class, 'store'])
-        ->name('guardhouses.store')
-        ->middleware('permission:guardhouses.create');
-
-    Route::get('/guardhouses/{guardhouse}', [GuardhouseController::class, 'show'])
-        ->name('guardhouses.show')
-        ->middleware('permission:guardhouses.show');
-
-    Route::get('/guardhouses/{guardhouse}/edit', [GuardhouseController::class, 'edit'])
-        ->name('guardhouses.edit')
-        ->middleware('permission:guardhouses.edit');
-
-    Route::patch('/guardhouses/{guardhouse}', [GuardhouseController::class, 'update'])
-        ->name('guardhouses.update')
-        ->middleware('permission:guardhouses.edit');
 
     // Keys
-    Route::get('/keys', [KeyController::class, 'index'])
-        ->name('keys.index')
-        ->middleware('permission:keys.index');
-
-    Route::get('/keys/create', [KeyController::class, 'create'])
-        ->name('keys.create')
-        ->middleware('permission:keys.create');
-
-    Route::post('/keys', [KeyController::class, 'store'])
-        ->name('keys.store')
-        ->middleware('permission:keys.create');
-
-    Route::get('/keys/{key}', [KeyController::class, 'show'])
-        ->name('keys.show')
-        ->middleware('permission:keys.show');
-
-    Route::get('/keys/{key}/edit', [KeyController::class, 'edit'])
-        ->name('keys.edit')
-        ->middleware('permission:keys.edit');
-
-    Route::patch('/keys/{key}', [KeyController::class, 'update'])
-        ->name('keys.update')
-        ->middleware('permission:keys.edit');
 
     // Key Authorizations
-    Route::get('/keyauthorizations', [KeyAuthorizationController::class, 'index'])
-        ->name('keyauthorizations.index')
-        ->middleware('permission:keyauthorizations.index');
-
-    Route::get('/keyauthorizations/create', [KeyAuthorizationController::class, 'create'])
-        ->name('keyauthorizations.create')
-        ->middleware('permission:keyauthorizations.create');
-
-    Route::post('/keyauthorizations', [KeyAuthorizationController::class, 'store'])
-        ->name('keyauthorizations.store')
-        ->middleware('permission:keyauthorizations.create');
-
-    Route::get('/keyauthorizations/{keyAuthorization}', [KeyAuthorizationController::class, 'show'])
-        ->name('keyauthorizations.show')
-        ->middleware('permission:keyauthorizations.show');
-
-    Route::get('/keyauthorizations/{keyAuthorization}/edit', [KeyAuthorizationController::class, 'edit'])
-        ->name('keyauthorizations.edit')
-        ->middleware('permission:keyauthorizations.edit');
-
-    Route::patch('/keyauthorizations/{keyAuthorization}', [KeyAuthorizationController::class, 'update'])
-        ->name('keyauthorizations.update')
-        ->middleware('permission:keyauthorizations.edit');
 
     // Coordinator Keys
     Route::get('/coordinatorkeys', [CoordinatorKeysController::class, 'index'])

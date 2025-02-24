@@ -22,62 +22,50 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'João Silva',
-            'email' => 'joao.silva@example.com',
+            'name' => 'Rennan',
+            'email' => 'rennan@example.com',
             'password' => Hash::make('123456'),
         ]);
 
         User::create([
-            'name' => 'Maria Oliveira',
-            'email' => 'maria.oliveira@example.com',
+            'name' => 'Vania',
+            'email' => 'vania@example.com',
             'password' => Hash::make('123456'),
         ]);
 
         User::create([
-            'name' => 'Carlos Pereira',
-            'email' => 'carlos.pereira@example.com',
+            'name' => 'João',
+            'email' => 'joao@example.com',
             'password' => Hash::make('123456'),
         ]);
 
         User::create([
-            'name' => 'Ana Costa',
-            'email' => 'ana.costa@example.com',
+            'name' => 'Isaac',
+            'email' => 'isaac@example.com',
             'password' => Hash::make('123456'),
         ]);
 
         User::create([
-            'name' => 'Lucas Santos',
-            'email' => 'lucas.santos@example.com',
+            'name' => 'Savio',
+            'email' => 'savio@example.com',
             'password' => Hash::make('123456'),
         ]);
 
         User::create([
-            'name' => 'Beatriz Lima',
-            'email' => 'beatriz.lima@example.com',
+            'name' => 'Jardson',
+            'email' => 'jardson@example.com',
             'password' => Hash::make('123456'),
         ]);
 
         User::create([
-            'name' => 'Felipe Souza',
-            'email' => 'felipe.souza@example.com',
+            'name' => 'Guarda 1',
+            'email' => 'guarda1@example.com',
             'password' => Hash::make('123456'),
         ]);
 
         User::create([
-            'name' => 'Camila Rocha',
-            'email' => 'camila.rocha@example.com',
-            'password' => Hash::make('123456'),
-        ]);
-
-        User::create([
-            'name' => 'Pedro Almeida',
-            'email' => 'pedro.almeida@example.com',
-            'password' => Hash::make('123456'),
-        ]);
-
-        User::create([
-            'name' => 'Juliana Ramos',
-            'email' => 'juliana.ramos@example.com',
+            'name' => 'Guarda 2',
+            'email' => 'guarda2@example.com',
             'password' => Hash::make('123456'),
         ]);
     }

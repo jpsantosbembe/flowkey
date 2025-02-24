@@ -15,7 +15,6 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         Permission::create(['name' => 'users.index']);
         Permission::create(['name' => 'users.create']);
         Permission::create(['name' => 'users.show']);
@@ -89,5 +88,57 @@ class RolesAndPermissionsSeeder extends Seeder
         if ($user) {
             $user->assignRole('admin');
         }
+
+        $coordenadorRole = Role::create(['name' => 'Coordenador']);
+        $coordenadorRole->givePermissionTo([
+            'keyauthorizations.index',
+            'keyauthorizations.create',
+            'keyauthorizations.show',
+            'keyauthorizations.edit',
+        ]);
+        $coordenadorUser = User::find(2);
+        if ($coordenadorUser) {
+            $coordenadorUser->assignRole('Coordenador');
+        }
+        $coordenadorUser = User::find(3);
+        if ($coordenadorUser) {
+            $coordenadorUser->assignRole('Coordenador');
+        }
+
+        $discenteRole = Role::create(['name' => 'Discente']);
+        $discenteRole->givePermissionTo([]);
+        $discenteUser = User::find(4);
+        if ($discenteUser) {
+            $discenteUser->assignRole('Discente');
+        }
+        $discenteUser = User::find(5);
+        if ($discenteUser) {
+            $discenteUser->assignRole('Discente');
+        }
+        $discenteUser = User::find(6);
+        if ($discenteUser) {
+            $discenteUser->assignRole('Discente');
+        }
+        $discenteUser = User::find(7);
+        if ($discenteUser) {
+            $discenteUser->assignRole('Discente');
+        }
+
+        $guardaRole   = Role::create(['name' => 'Guarda']);
+        $guardaRole->givePermissionTo([
+            'loans.index',
+            'loans.create',
+            'loans.show',
+            'loans.edit',
+        ]);
+        $guardaUser = User::find(8);
+        if ($guardaUser) {
+            $guardaUser->assignRole('Guarda');
+        }
+        $guardaUser = user::find(8);
+        if ($guardaUser) {
+            $guardaUser->assignRole('Guarda');
+        }
+
     }
 }
