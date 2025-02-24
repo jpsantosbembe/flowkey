@@ -79,7 +79,7 @@ export default {
                             <!-- Dropdown para Usuário que concedeu o empréstimo -->
                             <div>
                                 <label for="given_by_user_id" class="block text-sm font-medium text-gray-700">
-                                    Usuário que concedeu o empréstimo
+                                    Guarda que concedeu o empréstimo
                                 </label>
                                 <select
                                     v-model="form.given_by_user_id"
@@ -108,7 +108,7 @@ export default {
                                 >
                                     <option disabled value="">Selecione uma chave</option>
                                     <option v-for="key in keys" :key="key.id" :value="key.id">
-                                        {{ key.name || key.id }}
+                                        {{key.label }} - {{key.description}}
                                     </option>
                                 </select>
                                 <span v-if="form.errors.borrowed_key_id" class="text-red-500 text-sm">
@@ -119,7 +119,7 @@ export default {
                             <!-- Dropdown para Usuário que recebeu a chave (opcional) -->
                             <div>
                                 <label for="returned_by_user_id" class="block text-sm font-medium text-gray-700">
-                                    Usuário que recebeu a chave (opcional)
+                                    Usuário que devolveu a chave (opcional)
                                 </label>
                                 <select
                                     v-model="form.returned_by_user_id"
@@ -139,7 +139,7 @@ export default {
                             <!-- Dropdown para Usuário receptor (opcional) -->
                             <div>
                                 <label for="receiver_user_id" class="block text-sm font-medium text-gray-700">
-                                    Usuário receptor (opcional)
+                                    Guarda que recebeu a chave (opcional)
                                 </label>
                                 <select
                                     v-model="form.receiver_user_id"

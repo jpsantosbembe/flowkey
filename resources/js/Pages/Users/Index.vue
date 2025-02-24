@@ -41,12 +41,14 @@ export default {
 
 <template>
     <Head title="Dashboard"/>
+
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Usuarios -> Index
             </h2>
         </template>
+
         <div class="pt-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 

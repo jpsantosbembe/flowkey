@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CampusController;
 use App\Http\Controllers\CoordinatorKeysController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuardhouseController;
 use App\Http\Controllers\KeyAuthorizationController;
 use App\Http\Controllers\KeyController;
@@ -18,7 +19,10 @@ require __DIR__ . '/campus/campus.php';
 require __DIR__ . '/guardhouses/guardhouses.php';
 require __DIR__ . '/keys/keys.php';
 require __DIR__ . '/keyauthorizations/keyauthorizations.php';
+require __DIR__ . '/coordinatorkeys/coordinatorkeys.php';
+require __DIR__ . '/loans/loans.php';
 
+Route::aliasMiddleware('permission', PermissionMiddleware::class);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -29,11 +33,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', [
-        'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return Inertia::render('Dashboard2', [
+//        'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+//    ]);
+//})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,64 +49,7 @@ Route::middleware('auth')->group(function () {
     // Removida a rota DELETE para Profile, pois não queremos destroy/delete.
 });
 
-Route::aliasMiddleware('permission', PermissionMiddleware::class);
-
 Route::middleware(['auth'])->group(function () {
-    // Guardhouses
-
-    // Keys
-
-    // Key Authorizations
-
-    // Coordinator Keys
-    Route::get('/coordinatorkeys', [CoordinatorKeysController::class, 'index'])
-        ->name('coordinatorkeys.index')
-        ->middleware('permission:coordinatorkeys.index');
-
-    Route::get('/coordinatorkeys/create', [CoordinatorKeysController::class, 'create'])
-        ->name('coordinatorkeys.create')
-        ->middleware('permission:coordinatorkeys.create');
-
-    Route::post('/coordinatorkeys', [CoordinatorKeysController::class, 'store'])
-        ->name('coordinatorkeys.store')
-        ->middleware('permission:coordinatorkeys.create');
-
-    Route::get('/coordinatorkeys/{coordinatorsKeys}', [CoordinatorKeysController::class, 'show'])
-        ->name('coordinatorkeys.show')
-        ->middleware('permission:coordinatorkeys.show');
-
-    Route::get('/coordinatorkeys/{coordinatorsKeys}/edit', [CoordinatorKeysController::class, 'edit'])
-        ->name('coordinatorkeys.edit')
-        ->middleware('permission:coordinatorkeys.edit');
-
-    Route::patch('/coordinatorkeys/{coordinatorsKeys}', [CoordinatorKeysController::class, 'update'])
-        ->name('coordinatorkeys.update')
-        ->middleware('permission:coordinatorkeys.edit');
-
-    // Loans
-    Route::get('/loans', [LoanController::class, 'index'])
-        ->name('loans.index')
-        ->middleware('permission:loans.index');
-
-    Route::get('/loans/create', [LoanController::class, 'create'])
-        ->name('loans.create')
-        ->middleware('permission:loans.create');
-
-    Route::post('/loans', [LoanController::class, 'store'])
-        ->name('loans.store')
-        ->middleware('permission:loans.create');
-
-    Route::get('/loans/{loan}', [LoanController::class, 'show'])
-        ->name('loans.show')
-        ->middleware('permission:loans.show');
-
-    Route::get('/loans/{loan}/edit', [LoanController::class, 'edit'])
-        ->name('loans.edit')
-        ->middleware('permission:loans.edit');
-
-    Route::patch('/loans/{loan}', [LoanController::class, 'update'])
-        ->name('loans.update')
-        ->middleware('permission:loans.edit');
 
     // Rota para API de Keys
     Route::get('api/keys')->name('api.keys')->uses(KeyController::class . '@indexApi');

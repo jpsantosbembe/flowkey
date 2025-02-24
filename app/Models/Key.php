@@ -21,11 +21,17 @@ class Key extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(User::class, 'key_authorizations', 'key_id', 'user_id')->withPivot('is_active')->wherePivot('is_active', true);;
+        return $this->belongsToMany(User::class, 'key_authorizations', 'key_id', 'user_id')->withPivot('is_active')->wherePivot('is_active', true);
     }
 
     public function coordinators() : BelongsToMany
     {
         return $this->belongsToMany(User::class, 'coordinators_keys', 'key_id', 'user_id');
     }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'borrowed_key_id');
+    }
+
 }
