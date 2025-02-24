@@ -172,6 +172,13 @@ export default {
 
         <div class="pt-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+<!--                <v-text-field-->
+<!--                    v-model="searchTerm"-->
+<!--                    label="Pesquisar chave..."-->
+<!--                    variant="outlined"-->
+<!--                    dense-->
+<!--                    clearable-->
+<!--                />-->
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <v-container fluid>
