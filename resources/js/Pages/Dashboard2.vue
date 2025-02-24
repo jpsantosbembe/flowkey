@@ -4,16 +4,18 @@ import { Head } from "@inertiajs/vue3";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import _ from "lodash";
+import Pagination from "@/Components/Pagination.vue";
 
 export default {
     components: {
+        Pagination,
         PrimaryButton,
         SecondaryButton,
         AuthenticatedLayout,
         Head,
     },
     props: {
-        keys: Array,
+        keys: Object,
         permissions: Array,
     },
     data() {
@@ -22,6 +24,8 @@ export default {
             selectedKey: null,
             selectedUser: null,
             searchTerm: "",
+            currentPage: this.keys.current_page,
+            totalPages: this.keys.last_page,
         };
     },
     computed: {
@@ -42,6 +46,19 @@ export default {
         },
     },
     methods: {
+        changePage(page) {
+            if (this.currentPage === page) return;
+
+            this.currentPage = page;
+
+            this.$inertia.get(route("dashboard"), {
+                search: this.searchTerm,
+                page: this.currentPage,
+            }, {
+                preserveState: true,
+                replace: true,
+            });
+        },
         fetchKeys() {
             this.$inertia.get(route("dashboard"), { search: this.searchTerm }, {
                 preserveState: true,
@@ -49,7 +66,7 @@ export default {
             });
         },
         isAvailable(key) {
-            if (!key || !key.loans) return false; // Adiciona essa verificação
+            if (!key || !key.loans) return false;
             return key.loans.every((loan) => loan.returned_at !== null);
         },
         openDialog(key) {
@@ -172,24 +189,13 @@ export default {
                             </v-row>
 
                             <v-row>
-                                <v-col
-                                    v-for="key in keys"
-                                    :key="key.id"
-                                    cols="12"
-                                    sm="6"
-                                    md="4"
-                                >
-                                    <v-card
-                                        variant="elevated"
-                                        class="cursor-pointer"
-                                        @click="openDialog(key)"
-                                    >
+                                <v-col v-for="key in keys.data" :key="key.id" cols="12" sm="6" md="4">
+                                    <v-card variant="elevated" class="cursor-pointer" @click="openDialog(key)">
                                         <template #title>
                                             <div class="d-flex align-center">
                                                 <span class="headline">{{ key.label }}</span>
                                                 <v-spacer></v-spacer>
-                                                <v-avatar :color="isAvailable(key) ? 'green' : 'red'" size="40">
-                                                </v-avatar>
+                                                <v-avatar :color="isAvailable(key) ? 'green' : 'red'" size="40"></v-avatar>
                                             </div>
                                         </template>
                                         <template #text>
@@ -198,7 +204,22 @@ export default {
                                     </v-card>
                                 </v-col>
                             </v-row>
+
                         </v-container>
+
+                        <div class="flex justify-center mt-4">
+                            <Pagination
+                                :currentPage="currentPage"
+                                :totalPages="totalPages"
+                                @update:currentPage="changePage"
+                            />
+                        </div>
+
+                        <div class="mt-6 text-sm text-gray-600">
+                            Exibindo {{ keys.from }} a {{ keys.to }} de {{ keys.total }} chaves.
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -258,5 +279,6 @@ export default {
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
     </AuthenticatedLayout>
 </template>

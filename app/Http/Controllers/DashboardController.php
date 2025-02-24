@@ -13,17 +13,17 @@ class DashboardController extends Controller
         $query = Key::with(['loans', 'users']);
 
         if ($request->has('search') && $request->search != '') {
-            $search = $request->input('search');
-            $query->where('label', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%");
+            $search = strtolower($request->input('search')); // Converte para minúsculas
+
+            $query->whereRaw('LOWER(label) LIKE ?', ["%{$search}%"])
+                ->orWhereRaw('LOWER(description) LIKE ?', ["%{$search}%"]);
         }
 
-        $keys = $query->get();
+        $keys = $query->paginate(3)->withQueryString();
 
         return Inertia::render('Dashboard2', [
-            'keys' => $keys,
+            'keys'        => $keys,
             'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
         ]);
     }
-
 }

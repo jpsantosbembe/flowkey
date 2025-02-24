@@ -13,7 +13,7 @@ class LoanController extends Controller
     public function index()
     {
         $loans = Loan::with(['borrowedBy', 'givenBy', 'returnedBy', 'receivedBy', 'key'])
-            ->orderBy('id')
+            ->orderBy('id', 'DESC')
             ->paginate(3);
         return Inertia::render('Loans/Index', [
             'loans'       => $loans,
