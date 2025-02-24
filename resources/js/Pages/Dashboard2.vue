@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import _ from "lodash";
 
 export default {
     components: {
@@ -20,17 +21,16 @@ export default {
             dialog: false,
             selectedKey: null,
             selectedUser: null,
+            searchTerm: "",
         };
     },
     computed: {
-        // Retorna o empréstimo ativo para a chave selecionada (returned_at nulo)
         activeLoan() {
             if (!this.selectedKey) return null;
             return this.selectedKey.loans.find(
                 (loan) => loan.returned_at === null
             );
         },
-        // Tenta obter o usuário que retirou a chave
         activeLoanUser() {
             if (!this.activeLoan || !this.selectedKey) return null;
             if (this.activeLoan.borrowedBy && this.activeLoan.borrowedBy.name) {
@@ -42,6 +42,12 @@ export default {
         },
     },
     methods: {
+        fetchKeys() {
+            this.$inertia.get(route("dashboard"), { search: this.searchTerm }, {
+                preserveState: true,
+                replace: true,
+            });
+        },
         isAvailable(key) {
             if (!key || !key.loans) return false; // Adiciona essa verificação
             return key.loans.every((loan) => loan.returned_at !== null);
@@ -51,7 +57,6 @@ export default {
             this.selectedUser = null;
             this.dialog = true;
         },
-        // Função para formatar a data conforme desejado
         formatDate(dateString) {
             if (!dateString) return "";
             const date = new Date(dateString);
@@ -79,10 +84,10 @@ export default {
                     borrowed_key_id: this.selectedKey.id,
                     borrowed_at: new Date().toISOString(),
                     returned_at: null,
-                    redirect_to: route("dashboard2"), // Redirecionamento correto
+                    redirect_to: route("dashboard"),
                 };
 
-                this.dialog = false; // Fecha o dialog antes de resetar os dados
+                this.dialog = false;
 
                 this.$inertia.post(route("loans.store"), payload, {
                     preserveScroll: true,
@@ -92,7 +97,7 @@ export default {
                     },
                     onError: (errors) => {
                         console.error("Erro ao criar empréstimo:", errors);
-                        this.dialog = true; // Se houver erro, reabre o diálogo
+                        this.dialog = true;
                     },
                 });
             } else {
@@ -110,10 +115,10 @@ export default {
                     returned_at: new Date().toISOString(),
                     returned_by_user_id: this.selectedUser,
                     receiver_user_id: authUserId,
-                    redirect_to: route("dashboard2"), // Redirecionamento correto
+                    redirect_to: route("dashboard"),
                 };
 
-                this.dialog = false; // Fecha o dialog antes de resetar os dados
+                this.dialog = false;
 
                 this.$inertia.patch(route("loans.update", activeLoan.id), payload, {
                     preserveScroll: true,
@@ -123,12 +128,18 @@ export default {
                     },
                     onError: (errors) => {
                         console.error("Erro ao atualizar empréstimo:", errors);
-                        this.dialog = true; // Se houver erro, reabre o diálogo
+                        this.dialog = true;
                     },
                 });
             }
         }
     },
+    watch: {
+        searchTerm: _.debounce(function () {
+            this.fetchKeys();
+        }, 500)
+    }
+
 };
 </script>
 
@@ -147,6 +158,19 @@ export default {
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <v-container fluid>
+
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-text-field
+                                        v-model="searchTerm"
+                                        label="Pesquisar chave..."
+                                        variant="outlined"
+                                        dense
+                                        clearable
+                                    />
+                                </v-col>
+                            </v-row>
+
                             <v-row>
                                 <v-col
                                     v-for="key in keys"
