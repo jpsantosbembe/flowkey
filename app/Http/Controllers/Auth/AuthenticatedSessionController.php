@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
         if ($user->hasRole(['admin', 'Guarda'])) {
             return redirect()->route('controlpanel');
         } elseif ($user->hasRole('Coordenador')) {
-            return redirect()->route('mykeys');
+            return redirect()->route('coordinatorkeys.mykeys');
         } else {
             return redirect()->route('appdownload');
         }

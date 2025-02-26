@@ -86,8 +86,44 @@ class CoordinatorKeysController extends Controller
         return redirect()->route('coordinatorkeys.index')->with('success', 'Coordinator Key updated successfully.');
     }
 
-    public function destroy($id)
+    public function mykeys(Request $request)
     {
+        $searchTerm = $request->input('search');
+        $query = CoordinatorsKeys::with([
+            'key.authorizations' => function($q) {
+                $q->where('is_active', true)->with('user');
+            },
+            'user'
+        ])->where('user_id', auth()->id());
 
+        if ($searchTerm) {
+            $query->whereHas('key', function ($q) use ($searchTerm) {
+                $q->where('label', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $coordinatorKeys = $query->orderBy('id')->paginate(9);
+
+        return Inertia::render('CoordinatorKeys/MyKeys', [
+            'coordinatorKeys' => $coordinatorKeys,
+            'roles' => auth()->user()->getRoleNames(),
+        ]);
     }
+
+    public function searchUsers(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        $users = User::role('Discente')
+            ->when($searchTerm, function ($query) use ($searchTerm) {
+                return $query->where('name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('email', 'like', '%' . $searchTerm . '%');
+            })
+            ->limit(10)
+            ->get(['id', 'name', 'email']);
+
+        return response()->json($users);
+    }
+
 }

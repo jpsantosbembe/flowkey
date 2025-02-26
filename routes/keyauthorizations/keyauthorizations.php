@@ -27,4 +27,12 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/keyauthorizations/{keyAuthorization}', [KeyAuthorizationController::class, 'update'])
         ->name('keyauthorizations.update')
         ->middleware('permission:keyauthorizations.edit');
+
+    Route::post('/coordinatorkeys/add-authorization', [KeyAuthorizationController::class, 'addAuthorization'])
+        ->name('coordinatorkeys.add-authorization')
+        ->middleware('permission:keyauthorizations.create');
+
+    Route::delete('/coordinatorkeys/remove-authorization/{authorization}', [KeyAuthorizationController::class, 'removeAuthorization'])
+        ->name('coordinatorkeys.remove-authorization')
+        ->middleware('permission:keyauthorizations.edit');
 });

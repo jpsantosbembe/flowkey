@@ -34,4 +34,9 @@ class Key extends Model
         return $this->hasMany(Loan::class, 'borrowed_key_id');
     }
 
+    public function authorizations() {
+        return $this->hasMany(KeyAuthorization::class);
+    }
+
+
 }

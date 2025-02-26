@@ -25,6 +25,20 @@ require __DIR__ . '/loans/loans.php';
 Route::aliasMiddleware('permission', PermissionMiddleware::class);
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+
+        if ($user->hasRole('admin')) {
+            return redirect()->route('controlpanel');
+        }
+        elseif ($user->hasRole('Coordenador')) {
+            return redirect()->route('coordinatorkeys.mykeys');
+        }
+        elseif ($user->hasRole('Discente')) {
+            return redirect()->route('appdownload');
+        }
+    }
+
     return Inertia::render('Auth/Login', [
         'canLogin'      => Route::has('login'),
         'canRegister'   => Route::has('register'),
@@ -33,13 +47,6 @@ Route::get('/', function () {
     ]);
 });
 
-
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard2', [
-//        'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
-//    ]);
-//})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/controlpanel', [ControlPanel::class, 'index'])->name('controlpanel');
 });
@@ -47,13 +54,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Removida a rota DELETE para Profile, pois não queremos destroy/delete.
-});
-
-Route::middleware(['auth'])->group(function () {
-
-    // Rota para API de Keys
-    Route::get('api/keys')->name('api.keys')->uses(KeyController::class . '@indexApi');
 });
 
 require __DIR__ . '/auth.php';

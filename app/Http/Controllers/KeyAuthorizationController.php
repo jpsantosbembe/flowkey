@@ -83,4 +83,40 @@ class KeyAuthorizationController extends Controller
 
         return redirect()->route('keyauthorizations.index')->with('success', 'Key Authorization updated successfully');
     }
+
+    public function addAuthorization(Request $request)
+    {
+        $validated = $request->validate([
+            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'key_id' => ['required', 'integer', 'exists:keys,id'],
+        ]);
+
+        // Verifica se já existe autorização para este usuário e chave
+        $authorization = KeyAuthorization::where('user_id', $validated['user_id'])
+            ->where('key_id', $validated['key_id'])
+            ->first();
+
+        if ($authorization) {
+            // Se já existe, apenas ativa novamente
+            $authorization->update(['is_active' => true]);
+        } else {
+            // Se não existe, cria uma nova autorização
+            KeyAuthorization::create([
+                'user_id' => $validated['user_id'],
+                'key_id' => $validated['key_id'],
+                'is_active' => true,
+            ]);
+        }
+
+        return response()->json(['message' => 'Usuário autorizado com sucesso!'], 200);
+    }
+
+    public function removeAuthorization(KeyAuthorization $authorization)
+    {
+        // Desativa a autorização, ao invés de deletá-la
+        $authorization->update(['is_active' => false]);
+
+        return response()->json(['message' => 'Acesso removido com sucesso!'], 200);
+    }
+
 }
