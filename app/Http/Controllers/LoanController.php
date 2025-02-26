@@ -6,6 +6,8 @@ use App\Models\Key;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Inertia\Inertia;
 
 class LoanController extends Controller
@@ -87,12 +89,77 @@ class LoanController extends Controller
             'redirect_to'         => 'nullable|string',
         ]);
 
-        // Captura o redirect_to enviado; se não existir, usa a rota padrão
         $redirectTo = $validated['redirect_to'] ?? route('loans.index');
 
         $loan->update($validated);
 
         return redirect()->to($redirectTo)->with('success', 'Empréstimo atualizado com sucesso!');
+    }
+
+    public function history(Request $request)
+    {
+        // Carrega os empréstimos com os relacionamentos necessários, incluindo os usuários da chave
+        $loans = Loan::with([
+            'borrowedBy:id,name',
+            'givenBy:id,name',
+            'returnedBy:id,name',
+            'receivedBy:id,name',
+            'key:id,label',
+            'key.users:id,name'
+        ])->orderBy('id', 'DESC')->get();
+
+        $events = collect();
+
+        foreach ($loans as $loan) {
+            // Força a conversão do objeto Loan para array para garantir que todas as relações sejam serializadas
+            $loanArray = $loan->toArray();
+
+            if ($loan->borrowed_at) {
+                $events->push([
+                    'type'      => 'retirada',
+                    'timestamp' => $loan->borrowed_at,
+                    'user'      => $loan->borrowedBy ? $loan->borrowedBy->name : 'Desconhecido',
+                    'key'       => $loan->key ? $loan->key->label : 'Sem chave',
+                    'loan_id'   => $loan->id,
+                    'loan'      => $loanArray,
+                ]);
+            }
+
+            if ($loan->returned_at) {
+                $events->push([
+                    'type'      => 'devolução',
+                    'timestamp' => $loan->returned_at,
+                    'user'      => $loan->returnedBy ? $loan->returnedBy->name : 'Desconhecido',
+                    'key'       => $loan->key ? $loan->key->label : 'Sem chave',
+                    'loan_id'   => $loan->id,
+                    'loan'      => $loanArray,
+                ]);
+            }
+        }
+
+        // Ordena os eventos por data (mais recentes primeiro)
+        $sortedEvents = $events->sortByDesc('timestamp')->values();
+
+        // Paginação manual para os eventos
+        $perPage = 2;
+        $currentPage = \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPage();
+        $currentEvents = $sortedEvents->slice(($currentPage - 1) * $perPage, $perPage)->all();
+
+        $paginatedEvents = new \Illuminate\Pagination\LengthAwarePaginator(
+            $currentEvents,
+            $sortedEvents->count(),
+            $perPage,
+            $currentPage,
+            [
+                'path'  => $request->url(),
+                'query' => $request->query(),
+            ]
+        );
+
+        return Inertia::render('Loans/History', [
+            'events'      => $paginatedEvents,
+            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+        ]);
     }
 
 

@@ -27,4 +27,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/loans/{loan}', [LoanController::class, 'update'])
     ->name('loans.update')
     ->middleware('permission:loans.edit');
+
+    Route::get('/history', [LoanController::class, 'history'])
+        ->name('loans.history')
+        ->middleware('permission:loans.index');
 });

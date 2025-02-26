@@ -1,137 +1,86 @@
-# Sistema de Empréstimo de Chaves - UFOPA
+# Flowkey
 
 ## Introdução
 
-O Sistema de Empréstimo de Chaves é uma solução desenvolvida para a Universidade Federal do Oeste do Pará (UFOPA) com o objetivo de gerenciar o processo de empréstimo de chaves de salas e laboratórios dos campi.
-
-Este sistema permite controlar o acesso aos espaços da universidade, registrando quem retirou determinada chave, em qual horário, e quando foi devolvida, garantindo maior segurança e organização na gestão das chaves da universidade.
+O **Flowkey** é uma sistema desenvolvida para a Universidade Federal do Oeste do Pará (UFOPA) com o objetivo de gerenciar o processo de empréstimo de chaves de salas e laboratórios dos campi. O sistema permite controlar o acesso aos espaços da universidade, registrando quem retirou determinada chave, em qual horário, e quando foi devolvida, garantindo maior segurança e organização no acesso a esses espaços.
 
 ## Funcionalidades Principais
 
-- Cadastro e gerenciamento de chaves de salas e laboratórios
-- Registro de empréstimos e devoluções
-- Controle de acesso baseado em perfis de usuário
-- Histórico completo de movimentações
+- **Cadastro e gerenciamento de chaves**
+- **Registro de empréstimos e devoluções**
+- **Controle de acesso**
 
-## Requisitos do Sistema
+## Requisitos
 
-### Requisitos de Hardware
-- Processador: 1.0 GHz ou superior
-- Memória RAM: 2 GB ou superior
-- Espaço em disco: 1 GB para instalação
+- [Git](https://git-scm.com/)
+- [Node.js e npm](https://nodejs.org/)
+- [Composer](https://getcomposer.org/)
+- PHP (versão compatível com Laravel)
+- Banco de dados configurado (MySQL, PostgreSQL, etc.)
 
-### Requisitos de Software
-- PHP 8.1 ou superior
-- Composer 2.0 ou superior
-- Node.js 16.x ou superior
-- NPM 8.x ou superior
-- MySQL 8.0 ou MariaDB 10.5
-- Servidor Web (Apache/Nginx)
-- Git
+## Instalação e Configuração
 
-## Configuração do Projeto
+Siga os passos abaixo para clonar e configurar o projeto:
 
-### 1. Clone o Repositório
+1. **Clonar o repositório:**
 
-```bash
-git clone https://github.com/seu-usuario/sistema-emprestimo-chaves.git
-cd sistema-emprestimo-chaves
-```
+   ```bash
+   git clone git@github.com:jpsantosbembe/flowkey.git
+   ```
 
-### 2. Instalação de Dependências
+2. **Acessar o diretório do projeto:**
 
-```bash
-# Instalação das dependências do PHP
-composer install
+   ```bash
+   cd flowkey
+   ```
 
-# Instalação das dependências do Node.js
-npm install
-```
+3. **Instalar dependências do Node.js:**
 
-### 3. Configuração do Ambiente
+   ```bash
+   npm install
+   ```
 
-```bash
-# Copie o arquivo de ambiente
-cp .env.example .env
+4. **Instalar dependências do Composer:**
 
-# Gere a chave da aplicação
-php artisan key:generate
-```
+   ```bash
+   composer install
+   ```
 
-Edite o arquivo `.env` com as configurações do seu ambiente, especialmente as conexões de banco de dados:
+5. **Configurar o ambiente:**
 
-```
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=sistema_chaves
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
-```
+   Copie o arquivo de exemplo e ajuste as variáveis conforme necessário:
 
-### 4. Configuração do Banco de Dados
+   ```bash
+   cp .env.example .env
+   ```
 
-```bash
-# Crie a estrutura do banco de dados
-php artisan migrate
+6. **Executar as migrações (simulação e efetiva):**
 
-# (Opcional) Popule o banco com dados de exemplo
-php artisan db:seed
-```
+   Para verificar a conexão com o banco e simular as migrações:
 
-### 5. Compilação de Assets
+   ```bash
+   php artisan migrate --pretend
+   ```
 
-```bash
-# Desenvolvimento
-npm run dev
+   Em seguida, execute as migrações com os seeders:
 
-# Produção
-npm run build
-```
+   ```bash
+   php artisan migrate --seed
+   ```
 
-### 6. Iniciando o Servidor
+7. **Gerar a chave do aplicativo:**
+
+   ```bash
+   php artisan key:generate
+   ```
+
+## Execução do Projeto
+
+Após concluir a instalação e configuração, você pode iniciar o servidor local do Laravel para testar o sistema:
 
 ```bash
-php artisan serve
+composer run dev
 ```
 
-O sistema estará disponível em `http://localhost:8000`
+Acesse o sistema através do endereço indicado no terminal (normalmente `http://127.0.0.1:8000`).
 
-## Estrutura do Projeto
-
-O projeto segue a estrutura padrão do Laravel com algumas adaptações para integração com Vue.js e Inertia.js:
-
-- `app/` - Contém os modelos, controladores e lógica principal
-- `resources/js/` - Componentes Vue.js e lógica de frontend
-- `resources/views/` - Templates Blade e arquivos base do Inertia
-- `routes/` - Definições de rotas da aplicação
-- `database/` - Migrações e seeders do banco de dados
-- `public/` - Arquivos públicos e ponto de entrada da aplicação
-
-## Implantação em Produção
-
-Para implantar o sistema em ambiente de produção, siga estas recomendações adicionais:
-
-1. Configure um servidor web adequado (Nginx ou Apache)
-2. Utilize HTTPS para garantir a segurança das comunicações
-3. Configure backups regulares do banco de dados
-4. Ajuste as permissões de arquivo conforme necessário
-5. Otimize as configurações do PHP para ambiente de produção
-
-## Contribuição
-
-Para contribuir com o desenvolvimento deste projeto:
-
-1. Crie um fork do repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
-3. Faça commit das suas alterações (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Envie para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um Pull Request
-
-## Suporte
-
-Em caso de dúvidas ou problemas, entre em contato com a equipe de TI da UFOPA ou abra uma issue no repositório do projeto.
-
-## Licença
-
-Este projeto está licenciado sob [inserir tipo de licença].

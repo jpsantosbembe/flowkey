@@ -51,7 +51,7 @@ export default {
 
             this.currentPage = page;
 
-            this.$inertia.get(route("dashboard"), {
+            this.$inertia.get(route("controlpanel"), {
                 search: this.searchTerm,
                 page: this.currentPage,
             }, {
@@ -60,7 +60,7 @@ export default {
             });
         },
         fetchKeys() {
-            this.$inertia.get(route("dashboard"), { search: this.searchTerm }, {
+            this.$inertia.get(route("controlpanel"), { search: this.searchTerm }, {
                 preserveState: true,
                 replace: true,
             });
@@ -101,7 +101,7 @@ export default {
                     borrowed_key_id: this.selectedKey.id,
                     borrowed_at: new Date().toISOString(),
                     returned_at: null,
-                    redirect_to: route("dashboard"),
+                    redirect_to: route("controlpanel"),
                 };
 
                 this.dialog = false;
@@ -132,7 +132,7 @@ export default {
                     returned_at: new Date().toISOString(),
                     returned_by_user_id: this.selectedUser,
                     receiver_user_id: authUserId,
-                    redirect_to: route("dashboard"),
+                    redirect_to: route("controlpanel"),
                 };
 
                 this.dialog = false;
@@ -161,12 +161,12 @@ export default {
 </script>
 
 <template>
-    <Head title="Painel - Chaves" />
+    <Head title="Painel de Controle" />
 
     <AuthenticatedLayout :permissions="permissions">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Painel de Controle - Chaves
+                Painel de Controle
             </h2>
         </template>
 

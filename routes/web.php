@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CampusController;
 use App\Http\Controllers\CoordinatorKeysController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ControlPanel;
 use App\Http\Controllers\GuardhouseController;
 use App\Http\Controllers\KeyAuthorizationController;
 use App\Http\Controllers\KeyController;
@@ -25,13 +25,14 @@ require __DIR__ . '/loans/loans.php';
 Route::aliasMiddleware('permission', PermissionMiddleware::class);
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Auth/Login', [
         'canLogin'      => Route::has('login'),
         'canRegister'   => Route::has('register'),
         'laravelVersion'=> Application::VERSION,
         'phpVersion'    => PHP_VERSION,
     ]);
 });
+
 
 //Route::get('/dashboard', function () {
 //    return Inertia::render('Dashboard2', [
@@ -40,7 +41,7 @@ Route::get('/', function () {
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/controlpanel', [ControlPanel::class, 'index'])->name('controlpanel');
 });
 
 Route::middleware('auth')->group(function () {

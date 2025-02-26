@@ -47,7 +47,7 @@ export default {
                 </div>
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6">
-                        <VTable height="250px" fixed-header>
+                        <VTable height="250px" fixed-header >
                             <thead>
                             <tr>
                                 <th class="text-start">ID</th>

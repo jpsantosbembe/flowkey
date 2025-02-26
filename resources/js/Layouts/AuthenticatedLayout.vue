@@ -29,7 +29,7 @@ const props = defineProps({
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('controlpanel')">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
@@ -48,10 +48,17 @@ const props = defineProps({
 <!--                                </NavLink>-->
 
                                 <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :href="route('controlpanel')"
+                                    :active="route().current('controlpanel')"
                                 >
-                                    Dashboard
+                                    Painel de Controle
+                                </NavLink>
+
+                                <NavLink
+                                    :href="route('loans.history')"
+                                    :active="route().current('loans.history')"
+                                >
+                                    Histórico
                                 </NavLink>
 
                                 <NavLink
@@ -142,11 +149,11 @@ const props = defineProps({
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink
-                                            :href="route('profile.edit')"
-                                        >
-                                            Profile
-                                        </DropdownLink>
+<!--                                        <DropdownLink-->
+<!--                                            :href="route('profile.edit')"-->
+<!--                                        >-->
+<!--                                            Profile-->
+<!--                                        </DropdownLink>-->
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
@@ -212,8 +219,8 @@ const props = defineProps({
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            :href="route('controlpanel')"
+                            :active="route().current('controlpanel')"
                         >
                             Dashboard
                         </ResponsiveNavLink>
