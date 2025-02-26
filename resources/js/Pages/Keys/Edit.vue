@@ -10,7 +10,7 @@ export default {
     props: {
         iKey: Object,
         guardhouses: Array,
-        permissions: Array,
+        roles: Array,
     },
     setup(props) {
         const form = useForm({
@@ -34,7 +34,7 @@ export default {
 <template>
     <Head title="Editar Key" />
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Guardhouses -> Edit

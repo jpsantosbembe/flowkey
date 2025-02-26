@@ -9,7 +9,7 @@ export default {
     components: {Pagination, Link, SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
         coordinatorsKeys: Array,
-        permissions: Array,
+        roles: Array,
     },
     data() {
         return {
@@ -40,7 +40,7 @@ export default {
 
 <template>
     <Head title="Dashboard" />
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Coordinatorkeys -> Index

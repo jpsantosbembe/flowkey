@@ -19,7 +19,7 @@ class LoanController extends Controller
             ->paginate(3);
         return Inertia::render('Loans/Index', [
             'loans'       => $loans,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class LoanController extends Controller
         $loan->load(['borrowedBy', 'givenBy', 'returnedBy', 'receivedBy', 'key']);
         return Inertia::render('Loans/Show', [
             'loan'        => $loan,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -38,7 +38,7 @@ class LoanController extends Controller
         $keys  = Key::orderBy('id')->get();
 
         return Inertia::render('Loans/Create', [
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
             'users'       => $users,
             'keys'        => $keys,
         ]);
@@ -74,7 +74,7 @@ class LoanController extends Controller
 
         return Inertia::render('Loans/Edit', [
             'loan'        => $loan,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
             'users'       => $users,
             'keys'        => $keys,
         ]);
@@ -158,9 +158,10 @@ class LoanController extends Controller
 
         return Inertia::render('Loans/History', [
             'events'      => $paginatedEvents,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
+    //TODO barra de pesquisa
 
 }

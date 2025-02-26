@@ -11,7 +11,7 @@ export default {
         coordinatorsKeys: Object,
         users: Array,
         keys: Array,
-        permissions: Array,
+        roles: Array,
     },
     methods: {
         goBack() {
@@ -40,7 +40,7 @@ export default {
 <template>
     <Head title="Coordinator Keys Authorization"/>
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 CoordinatorKeys -> Edit

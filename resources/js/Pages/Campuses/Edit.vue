@@ -8,7 +8,7 @@ export default {
     components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
         campus: Object,
-        permissions: Array,
+        roles: Array,
     },
     setup(props) {
         const form = useForm({
@@ -29,7 +29,7 @@ export default {
 <template>
     <Head title="Editar Usuário"/>
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Campuses -> Edit

@@ -15,7 +15,7 @@ class GuardhouseController extends Controller
         $guardhouses = Guardhouse::with('campus')->orderBy('id')->paginate(3);
         return Inertia::render('Guardhouses/Index', [
             'guardhouses' => $guardhouses,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -24,7 +24,7 @@ class GuardhouseController extends Controller
         //dd($guardhouse->campus->toArray());
         return Inertia::render('Guardhouses/Show', [
             'guardhouse' => $guardhouse,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
             'guardhouse_campus' => [$guardhouse->campus->toArray()] ,
         ]);
     }
@@ -34,7 +34,7 @@ class GuardhouseController extends Controller
         //dd($campuses);
         return Inertia::render('Guardhouses/Create',[
             'campuses' => $campuses,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -58,7 +58,7 @@ class GuardhouseController extends Controller
         return Inertia::render('Guardhouses/Edit', [
             'guardhouse' => $guardhouse,
             'campuses' => $campuses,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 

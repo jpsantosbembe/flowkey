@@ -7,7 +7,7 @@ export default {
     components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
         iKey: Object,
-        permissions: Array,
+        roles: Array,
         key_coordinators: Array,
         key_users: Array,
     },
@@ -27,7 +27,7 @@ export default {
 
 <template>
     <Head title="Dashboard"/>
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Keys -> Show

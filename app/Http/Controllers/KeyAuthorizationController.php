@@ -17,7 +17,7 @@ class KeyAuthorizationController extends Controller
         //dd($keyAuthorization);
         return Inertia::render('KeyAuthorizations/Index',[
             'keyAuthorizations' => $keyAuthorization,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -25,7 +25,7 @@ class KeyAuthorizationController extends Controller
         $keyAuthorization->load(['user', 'key']);
         return Inertia::render('KeyAuthorizations/Show', [
             'keyAuthorization' => $keyAuthorization,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -35,7 +35,7 @@ class KeyAuthorizationController extends Controller
         return Inertia::render('KeyAuthorizations/Create',[
             'users' => $users,
             'keys' => $keys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -64,7 +64,7 @@ class KeyAuthorizationController extends Controller
             'keyAuthorization' => $keyAuthorization,
             'users' => $users,
             'keys' => $keys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 

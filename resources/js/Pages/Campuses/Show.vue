@@ -7,7 +7,7 @@ export default {
     components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
         campus: Object,
-        permissions: Array,
+        roles: Array,
         campus_guardhouses: Array,
     },
     data() {
@@ -28,7 +28,7 @@ export default {
 
     <Head title="Dashboard"/>
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Campus -> Show

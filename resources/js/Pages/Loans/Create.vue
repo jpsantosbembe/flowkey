@@ -7,9 +7,9 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 export default {
     components: { AuthenticatedLayout, Head, PrimaryButton, SecondaryButton },
     props: {
-        permissions: Array,
+        roles: Array,
         users: Array,
-        keys: Array, // Recebe a lista de chaves do controller
+        keys: Array,
     },
     methods: {
         goBack() {
@@ -43,7 +43,7 @@ export default {
 <template>
     <Head title="Criar Empréstimo" />
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Empréstimos -> Criar

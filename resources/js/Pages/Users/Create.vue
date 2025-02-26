@@ -7,7 +7,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 export default {
     components: {SecondaryButton, PrimaryButton, Head, AuthenticatedLayout},
     props: {
-        permissions: Array,
+        roles: Array,
     },
     methods: {
         goBack() {
@@ -38,7 +38,7 @@ export default {
 <template>
     <Head title="Criar Usuário"/>
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Usuarios -> Create

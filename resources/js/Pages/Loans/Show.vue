@@ -7,7 +7,7 @@ export default {
     components: { PrimaryButton, Head, AuthenticatedLayout },
     props: {
         loan: Object,
-        permissions: Array,
+        roles: Array,
     },
     data() {
         return {
@@ -24,7 +24,7 @@ export default {
 
 <template>
     <Head title="Detalhes do Empréstimo" />
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">Empréstimos - Detalhes</h2>
         </template>

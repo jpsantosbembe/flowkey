@@ -8,7 +8,7 @@ export default {
     components: { AuthenticatedLayout, Head, PrimaryButton, SecondaryButton },
     props: {
         loan: Object,
-        permissions: Array,
+        roles: Array,
         users: Array,
         keys: Array,
     },
@@ -19,7 +19,6 @@ export default {
             borrowed_key_id: props.loan.borrowed_key_id || "",
             returned_by_user_id: props.loan.returned_by_user_id || "",
             receiver_user_id: props.loan.receiver_user_id || "",
-            // Ajuste para input datetime-local: removendo segundos, se necessário
             borrowed_at: props.loan.borrowed_at ? props.loan.borrowed_at.substring(0, 16) : "",
             returned_at: props.loan.returned_at ? props.loan.returned_at.substring(0, 16) : "",
         });
@@ -44,7 +43,7 @@ export default {
 
 <template>
     <Head title="Editar Empréstimo"/>
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Empréstimos -> Edit

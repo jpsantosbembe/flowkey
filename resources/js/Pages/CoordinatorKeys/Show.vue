@@ -7,7 +7,7 @@ export default {
     components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
         coordinatorsKeys: Array,
-        permissions: Array,
+        roles: Array,
     },
     data() {
         return {
@@ -27,7 +27,7 @@ export default {
 
     <Head title="Dashboard"/>
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Keys -> Show

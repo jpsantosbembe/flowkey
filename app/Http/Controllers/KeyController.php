@@ -16,7 +16,7 @@ class KeyController extends Controller
         $keys = Key::with('guardhouse')->orderBy('id')->paginate(3);
         return Inertia::render('Keys/Index',[
             'keys' => $keys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -37,7 +37,7 @@ class KeyController extends Controller
         $guardhouses = Guardhouse::orderBy('name')->get();
         return Inertia::render('Keys/Create',[
             'guardhouses' => $guardhouses,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -64,7 +64,7 @@ class KeyController extends Controller
         //dd($key);
         return Inertia::render('Keys/Show', [
             'iKey' => $key,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
             'key_coordinators' => $key->coordinators,
             'key_users' => $key->users,
         ]);
@@ -76,7 +76,7 @@ class KeyController extends Controller
         return Inertia::render('Keys/Edit', [
             'iKey' => $key,
             'guardhouses' => $guardhouses,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 

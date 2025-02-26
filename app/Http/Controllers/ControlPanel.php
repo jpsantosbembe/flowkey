@@ -23,7 +23,7 @@ class ControlPanel extends Controller
 
         return Inertia::render('ControlPanel', [
             'keys'        => $keys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 }

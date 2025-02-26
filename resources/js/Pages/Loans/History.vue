@@ -18,7 +18,7 @@ export default {
                 total: 0,
             }),
         },
-        permissions: Array,
+        roles: Array,
     },
     data() {
         return {
@@ -75,7 +75,7 @@ export default {
 
 <template>
     <Head title="Histórico de Empréstimos" />
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Histórico de Empréstimos

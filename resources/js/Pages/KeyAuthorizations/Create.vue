@@ -10,7 +10,7 @@ export default {
     props: {
         users: Array,
         keys: Array,
-        permissions: Array,
+        roles: Array,
     },
     methods: {
         goBack() {
@@ -40,7 +40,7 @@ export default {
 <template>
     <Head title="Criar Key Authorization"/>
 
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Key Authorization -> Create

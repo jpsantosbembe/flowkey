@@ -7,7 +7,7 @@ export default {
     components: {PrimaryButton, Head, AuthenticatedLayout},
     props: {
         users: Object,
-        permissions: Array,
+        roles: Array,
         user_roles: Array,
         user_permissions: Array,
     },
@@ -26,7 +26,7 @@ export default {
 
 <template>
     <Head title="Dashboard"/>
-    <AuthenticatedLayout :permissions="permissions">
+    <AuthenticatedLayout :roles="roles">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Usuarios -> Show

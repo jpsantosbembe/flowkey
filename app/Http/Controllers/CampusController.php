@@ -14,14 +14,14 @@ class CampusController extends Controller
         $campi = Campus::orderBy('id')->paginate(3);
         return Inertia::render('Campuses/Index', [
             'campuses' => $campi,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
     public function create()
     {
         return Inertia::render('Campuses/Create',[
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -42,7 +42,7 @@ class CampusController extends Controller
     {
         return Inertia::render('Campuses/Show', [
             'campus' => $campus,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
             'campus_guardhouses' => $campus->campusGuardhouses,
         ]);
     }
@@ -51,7 +51,7 @@ class CampusController extends Controller
     {
         return Inertia::render('Campuses/Edit', [
             'campus' => $campus,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 

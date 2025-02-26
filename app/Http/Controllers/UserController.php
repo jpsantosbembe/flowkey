@@ -14,7 +14,7 @@ class UserController extends Controller
         $users = User::orderBy('id')->paginate(3);
         return Inertia::render('Users/Index', [
             'users' => $users,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -38,7 +38,7 @@ class UserController extends Controller
     public function create()
     {
         return Inertia::render('Users/Create',[
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -47,7 +47,7 @@ class UserController extends Controller
         //dd($user->getAllPermissions()->pluck('name'));
         return Inertia::render('Users/Show', [
             'users' => $user,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
             'user_roles' => $user->getRoleNames(),
             'user_permissions' => $user->getAllPermissions()->pluck('name'),
         ]);
@@ -57,7 +57,7 @@ class UserController extends Controller
     {
         return Inertia::render('Users/Edit', [
             'users' => $user,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 

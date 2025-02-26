@@ -17,7 +17,7 @@ class CoordinatorKeysController extends Controller
         //dd($coordinatorKeys);
         return Inertia::render('CoordinatorKeys/Index', [
             'coordinatorsKeys' => $coordinatorKeys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class CoordinatorKeysController extends Controller
         return Inertia::render('CoordinatorKeys/Create', [
             'users' => $users,
             'keys' => $keys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
 
     }
@@ -53,7 +53,7 @@ class CoordinatorKeysController extends Controller
         $coordinatorsKeys->load(['user', 'key']);
         return Inertia::render('CoordinatorKeys/Show', [
             'coordinatorsKeys' => $coordinatorsKeys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
     }
 
@@ -66,7 +66,7 @@ class CoordinatorKeysController extends Controller
             'coordinatorsKeys' => $coordinatorsKeys,
             'users' => $users,
             'keys' => $keys,
-            'permissions' => auth()->user()->getAllPermissions()->pluck('name'),
+            'roles' => auth()->user()->getRoleNames(),
         ]);
 
     }

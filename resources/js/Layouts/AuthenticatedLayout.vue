@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
 const showingNavigationDropdown = ref(false);
 
 const props = defineProps({
-    permissions: {
+    roles: {
         type: Array,
         required: true,
     }
@@ -48,6 +48,7 @@ const props = defineProps({
 <!--                                </NavLink>-->
 
                                 <NavLink
+                                    v-if="roles.includes('Guarda') || roles.includes('admin')"
                                     :href="route('controlpanel')"
                                     :active="route().current('controlpanel')"
                                 >
@@ -55,6 +56,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
+                                    v-if="roles.includes('Guarda') || roles.includes('admin')"
                                     :href="route('loans.history')"
                                     :active="route().current('loans.history')"
                                 >
@@ -62,7 +64,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('users.index')"
+                                    v-if="roles.includes('admin')"
                                     :href="route('users.index')"
                                     :active="route().current('users.index')"
                                 >
@@ -70,7 +72,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('campuses.index')"
+                                    v-if="roles.includes('admin')"
                                     :href="route('campuses.index')"
                                     :active="route().current('campuses.index')"
                                 >
@@ -78,7 +80,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('guardhouses.index')"
+                                    v-if="roles.includes('admin')"
                                     :href="route('guardhouses.index')"
                                     :active="route().current('guardhouses.index')"
                                 >
@@ -86,7 +88,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('keys.index')"
+                                    v-if="roles.includes('admin')"
                                     :href="route('keys.index')"
                                     :active="route().current('keys.index')"
                                 >
@@ -94,7 +96,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('keyauthorizations.index')"
+                                    v-if="roles.includes('admin')"
                                     :href="route('keyauthorizations.index')"
                                     :active="route().current('keyauthorizations.index')"
                                 >
@@ -102,7 +104,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('coordinatorkeys.index')"
+                                    v-if="roles.includes('admin')"
                                     :href="route('coordinatorkeys.index')"
                                     :active="route().current('coordinatorkeys.index')"
                                 >
@@ -110,7 +112,7 @@ const props = defineProps({
                                 </NavLink>
 
                                 <NavLink
-                                    v-if="permissions.includes('loans.index')"
+                                    v-if="roles.includes('admin')"
                                     :href="route('loans.index')"
                                     :active="route().current('loans.index')"
                                 >
