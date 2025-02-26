@@ -1,66 +1,137 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Empréstimo de Chaves - UFOPA
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introdução
 
-## About Laravel
+O Sistema de Empréstimo de Chaves é uma solução desenvolvida para a Universidade Federal do Oeste do Pará (UFOPA) com o objetivo de gerenciar o processo de empréstimo de chaves de salas e laboratórios dos campi.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este sistema permite controlar o acesso aos espaços da universidade, registrando quem retirou determinada chave, em qual horário, e quando foi devolvida, garantindo maior segurança e organização na gestão das chaves da universidade.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Funcionalidades Principais
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Cadastro e gerenciamento de chaves de salas e laboratórios
+- Registro de empréstimos e devoluções
+- Controle de acesso baseado em perfis de usuário
+- Histórico completo de movimentações
 
-## Learning Laravel
+## Requisitos do Sistema
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Requisitos de Hardware
+- Processador: 1.0 GHz ou superior
+- Memória RAM: 2 GB ou superior
+- Espaço em disco: 1 GB para instalação
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Requisitos de Software
+- PHP 8.1 ou superior
+- Composer 2.0 ou superior
+- Node.js 16.x ou superior
+- NPM 8.x ou superior
+- MySQL 8.0 ou MariaDB 10.5
+- Servidor Web (Apache/Nginx)
+- Git
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Configuração do Projeto
 
-## Laravel Sponsors
+### 1. Clone o Repositório
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone https://github.com/seu-usuario/sistema-emprestimo-chaves.git
+cd sistema-emprestimo-chaves
+```
 
-### Premium Partners
+### 2. Instalação de Dependências
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+# Instalação das dependências do PHP
+composer install
 
-## Contributing
+# Instalação das dependências do Node.js
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Configuração do Ambiente
 
-## Code of Conduct
+```bash
+# Copie o arquivo de ambiente
+cp .env.example .env
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Gere a chave da aplicação
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+Edite o arquivo `.env` com as configurações do seu ambiente, especialmente as conexões de banco de dados:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sistema_chaves
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
 
-## License
+### 4. Configuração do Banco de Dados
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+# Crie a estrutura do banco de dados
+php artisan migrate
+
+# (Opcional) Popule o banco com dados de exemplo
+php artisan db:seed
+```
+
+### 5. Compilação de Assets
+
+```bash
+# Desenvolvimento
+npm run dev
+
+# Produção
+npm run build
+```
+
+### 6. Iniciando o Servidor
+
+```bash
+php artisan serve
+```
+
+O sistema estará disponível em `http://localhost:8000`
+
+## Estrutura do Projeto
+
+O projeto segue a estrutura padrão do Laravel com algumas adaptações para integração com Vue.js e Inertia.js:
+
+- `app/` - Contém os modelos, controladores e lógica principal
+- `resources/js/` - Componentes Vue.js e lógica de frontend
+- `resources/views/` - Templates Blade e arquivos base do Inertia
+- `routes/` - Definições de rotas da aplicação
+- `database/` - Migrações e seeders do banco de dados
+- `public/` - Arquivos públicos e ponto de entrada da aplicação
+
+## Implantação em Produção
+
+Para implantar o sistema em ambiente de produção, siga estas recomendações adicionais:
+
+1. Configure um servidor web adequado (Nginx ou Apache)
+2. Utilize HTTPS para garantir a segurança das comunicações
+3. Configure backups regulares do banco de dados
+4. Ajuste as permissões de arquivo conforme necessário
+5. Otimize as configurações do PHP para ambiente de produção
+
+## Contribuição
+
+Para contribuir com o desenvolvimento deste projeto:
+
+1. Crie um fork do repositório
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
+3. Faça commit das suas alterações (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Envie para a branch (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
+
+## Suporte
+
+Em caso de dúvidas ou problemas, entre em contato com a equipe de TI da UFOPA ou abra uma issue no repositório do projeto.
+
+## Licença
+
+Este projeto está licenciado sob [inserir tipo de licença].
